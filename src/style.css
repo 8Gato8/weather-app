@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter')
+    url('./assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', serif, system-ui, 'Segoe UI';
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
