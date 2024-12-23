@@ -20,6 +20,7 @@
     "css-minimizer-webpack-plugin": "^7.0.0",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
+    "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.9.1",
     "prettier": "3.4.2",
