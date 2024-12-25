@@ -1,3 +1,7 @@
+@import url('./css/color-variables.css');
+@import url('./css/button-animated.css');
+@import url('./css/header.css');
+
 @font-face {
   font-family: 'Inter';
   src: url('./assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf')
