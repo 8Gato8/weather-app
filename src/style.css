@@ -19,6 +19,11 @@ html {
 
 body {
   font-family: 'Inter', Arial, Helvetica, system-ui, 'Segoe UI';
+  font-weight: 400;
+}
+
+body * {
+  font-family: inherit;
 }
 
 ul {
