@@ -1,6 +1,9 @@
 @import url('./css/color-variables.css');
 @import url('./css/button-animated.css');
+@import url('./css/main.css');
 @import url('./css/header.css');
+@import url('./css/container.css');
+@import url('./css/weather-for-the-day.css');
 
 @font-face {
   font-family: 'Inter';
