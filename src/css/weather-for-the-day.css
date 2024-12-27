@@ -39,11 +39,6 @@
   opacity: 0.7;
 }
 
-.yesterday__temp,
-.yesterday__sign {
-  font-weight: 500;
-}
-
 .weather-for-the-day__main-info-wrapper {
   display: flex;
   gap: 20px;
