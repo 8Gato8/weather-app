@@ -1,6 +1,6 @@
 import './style.css';
 
-import fetchWeather from './ts/api/fetchWeather';
+/* import fetchWeather from './ts/api/fetchWeather';
 
 const address = 'Irkutsk';
 const daysCount = 'next30days';
@@ -9,4 +9,4 @@ async function getWeather() {
   console.log(data);
 }
 
-getWeather();
+getWeather(); */
