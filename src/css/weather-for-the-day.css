@@ -2,6 +2,8 @@
   background-color: var(--main-purple);
   padding: 30px;
   border-radius: 8px;
+
+  color: var(--white);
 }
 
 .weather-for-the-day__container {
@@ -17,7 +19,6 @@
 }
 
 .weather-for-the-day__address {
-  color: var(--white);
   font-size: 1.3rem;
   font-weight: 700;
 }
@@ -26,7 +27,6 @@
   display: flex;
   gap: 10px;
 
-  color: var(--white);
   font-size: 1rem;
   font-weight: 400;
 }
@@ -44,7 +44,6 @@
   gap: 20px;
   align-items: center;
 
-  color: var(--white);
   font-size: 1rem;
   font-weight: 400;
 }
