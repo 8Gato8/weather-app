@@ -3,7 +3,7 @@
 @import url('./css/main.css');
 @import url('./css/header.css');
 @import url('./css/container.css');
-@import url('./css/weather-for-the-day.css');
+@import url('./css/selected-day-weather.css');
 
 @font-face {
   font-family: 'Inter';

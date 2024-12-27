@@ -1,4 +1,4 @@
-.weather-for-the-day {
+.selected-day-weather {
   background-color: var(--main-purple);
   padding: 30px;
   border-radius: 8px;
@@ -6,7 +6,7 @@
   color: var(--white);
 }
 
-.weather-for-the-day__container {
+.selected-day-weather__container {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -15,18 +15,18 @@
   padding-bottom: 25px;
 }
 
-.weather-for-the-day__heading-wrapper {
+.selected-day-weather__heading-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.weather-for-the-day__address {
+.selected-day-weather__address {
   font-size: 1.3rem;
   font-weight: 700;
 }
 
-.weather-for-the-day__yesterday-wrapper {
+.selected-day-weather__yesterday-wrapper {
   display: flex;
   gap: 10px;
 
@@ -34,7 +34,7 @@
   font-weight: 400;
 }
 
-.weather-for-the-day__time {
+.selected-day-weather__time {
   opacity: 0.7;
 }
 
@@ -42,7 +42,7 @@
   opacity: 0.7;
 }
 
-.weather-for-the-day__main-info-wrapper {
+.selected-day-weather__main-info-wrapper {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -51,16 +51,16 @@
   font-weight: 400;
 }
 
-.weather-for-the-day__temp {
+.selected-day-weather__temp {
   font-size: 4rem;
 }
 
-.weather-for-the-day__icon {
+.selected-day-weather__icon {
   width: 100px;
   height: 50px;
 }
 
-.weather-for-the-day__main-text-info {
+.selected-day-weather__main-text-info {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -70,14 +70,14 @@
   opacity: 0.7;
 }
 
-.weather-for-the-day__additional-info-wrapper {
+.selected-day-weather__additional-info-wrapper {
   display: flex;
   gap: 40px;
 }
 
-.weather-for-the-day__wind,
-.weather-for-the-day__humidity,
-.weather-for-the-day__pressure {
+.selected-day-weather__wind,
+.selected-day-weather__humidity,
+.selected-day-weather__pressure {
   display: flex;
   align-items: center;
   gap: 5px;
