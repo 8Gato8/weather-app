@@ -2,7 +2,12 @@
   --white: #fff;
 
   --light-gray: #f1f1f1;
-  --main-purple: #5658ce;
+  --main-purple: #4a86a4;
+
+  --selected-day-aftefnoon: #4a86a4;
+  --selected-day-evening: #236f94;
+  --selected-day-night: #0e3c53;
+  --selected-day-weather: var(--selected-day-aftefnoon);
 
   --dark-ashen: #242832;
   --dark-ashen-lightened-by-7: #323846;
