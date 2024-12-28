@@ -1,5 +1,5 @@
 .selected-day-weather {
-  background-color: var(--main-purple);
+  background-color: var(--selected-day-weather);
   padding: 30px;
   border-radius: 8px;
 
