@@ -5,7 +5,7 @@
   align-items: center;
 
   padding: 30px 60px;
-  background-color: var(--main-purple);
+  background-color: var(--selected-day-weather);
 }
 
 .header__search-input {
