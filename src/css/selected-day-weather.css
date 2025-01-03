@@ -31,7 +31,7 @@
   font-weight: 400;
 }
 
-.selected-day-weather__time {
+.selected-day-weather__current-time {
   opacity: 0.7;
 }
 
