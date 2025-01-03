@@ -4,6 +4,9 @@
 @import url('./css/header.css');
 @import url('./css/container.css');
 @import url('./css/selected-day-weather.css');
+@import url('./css/hours.css');
+@import url('./css/hourly-weather-cards.css');
+@import url('./css/hour-weather-card.css');
 
 @font-face {
   font-family: 'Inter';

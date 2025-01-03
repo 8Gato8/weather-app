@@ -1,0 +1,4 @@
+.hourly-weather-cards {
+  display: flex;
+  gap: 15px;
+}

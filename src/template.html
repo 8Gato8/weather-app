@@ -97,9 +97,55 @@
                 <span class="pressure__text"> 740 мм.рт.ст. </span>
               </p>
             </div>
+
+            <div class="selected-day-weather__hours hours">
+              <button
+                id="slide-left"
+                class="hours__slide-button button-animated"
+              >
+                <img
+                  class="hours__arrow-left hours__arrow"
+                  src="./assets/img/arrow.svg"
+                  alt="Иконка слайда влево"
+                />
+              </button>
+              <div class="hours__slider">
+                <ul class="hourly-weather-cards"></ul>
+              </div>
+
+              <button
+                id="slide-right"
+                class="hours__slide-button button-animated"
+              >
+                <img
+                  class="hours__arrow-right hours__arrow"
+                  src="./assets/img/arrow.svg"
+                  alt="Инонка слайда вправо"
+                />
+              </button>
+            </div>
           </div>
         </section>
       </div>
     </main>
+
+    <template id="hour-weather-card-template">
+      <li>
+        <article class="hourly-weather-cards__card hour-weather-card">
+          <time
+            class="hour-weather-card__time"
+            datetime="2024-12-27 00:00+0800"
+          >
+            00:00
+          </time>
+          <img
+            class="hour-weather-card__icon"
+            src="./assets/img/weather/cloudy.svg"
+            alt=""
+          />
+          <p class="hour-weather-card__temp">-18°</p>
+        </article>
+      </li>
+    </template>
   </body>
 </html>

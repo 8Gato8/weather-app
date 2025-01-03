@@ -1,0 +1,18 @@
+.hours__slider {
+  flex: 1;
+  overflow: hidden;
+}
+
+.hours__slide-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.hours__slide-button:hover {
+  opacity: 0.7;
+}
+
+.hours__arrow-right {
+  transform: rotate(180deg);
+}

@@ -79,3 +79,13 @@
   align-items: center;
   gap: 5px;
 }
+
+.selected-day-weather__hours {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  border-top: 1px solid rgb(255 255 255 / 0.3);
+  padding: 25px 0 25px 0;
+}
