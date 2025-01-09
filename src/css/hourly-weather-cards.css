@@ -3,6 +3,7 @@
   left: 0;
 
   display: flex;
+  gap: var(--hourly-card-gap);
 
   transition-duration: 480ms;
 }
