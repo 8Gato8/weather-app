@@ -1,4 +1,6 @@
 .hours__slider {
+  height: 90px;
+  position: relative;
   flex: 1;
   overflow: hidden;
 }
