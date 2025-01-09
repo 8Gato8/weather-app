@@ -11,6 +11,6 @@
 }
 
 .hour-weather-card__icon {
-  width: 50px;
-  height: 50px;
+  width: var(--hourly-card-width);
+  height: var(--hourly-card-width);
 }
