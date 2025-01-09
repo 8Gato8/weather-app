@@ -3,4 +3,6 @@
   left: 0;
 
   display: flex;
+
+  transition-duration: 480ms;
 }
