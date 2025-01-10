@@ -45,3 +45,11 @@ button {
   border: none;
   cursor: pointer;
 }
+
+button:disabled {
+  opacity: 0.6;
+}
+
+button:hover:disabled {
+  opacity: 0.6;
+}
