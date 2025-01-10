@@ -109,7 +109,7 @@
                 />
               </button>
               <div class="hours__slider">
-                <ul class="hourly-weather-cards"></ul>
+                <article class="hourly-weather-cards"></article>
               </div>
 
               <button
@@ -129,16 +129,14 @@
     </main>
 
     <template id="hour-weather-card-template">
-      <li>
-        <article class="hourly-weather-cards__card hour-weather-card">
-          <time class="hour-weather-card__time"> </time>
-          <img
-            class="hour-weather-card__icon"
-            alt=""
-          />
-          <p class="hour-weather-card__temp"></p>
-        </article>
-      </li>
+      <article class="hourly-weather-cards__card hour-weather-card">
+        <time class="hour-weather-card__time"> </time>
+        <img
+          class="hour-weather-card__icon"
+          alt=""
+        />
+        <p class="hour-weather-card__temp"></p>
+      </article>
     </template>
   </body>
 </html>
