@@ -1,0 +1,20 @@
+.select-period {
+  display: flex;
+  gap: 20px;
+}
+
+.select-period__button {
+  font-size: 1rem;
+  background-color: var(--forecast-days-button-background-color);
+  color: #222426;
+  border-radius: 8px;
+  max-width: 180px;
+  flex: 1;
+  padding: 15px;
+
+  cursor: pointer;
+}
+
+.select-period__button:hover {
+  background-color: var(--forecast-days-button-background-color-hover);
+}

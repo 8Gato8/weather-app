@@ -125,6 +125,28 @@
             </div>
           </div>
         </section>
+
+        <div class="forecast-days">
+          <div class="forecast-days__select-period select-period">
+            <button
+              id="ten-day-forecast-choice"
+              class="select-period__button button-animated"
+            >
+              На 10 дней
+            </button>
+
+            <button
+              id="thirty-day-forecast-choice"
+              class="select-period__button button-animated"
+            >
+              На месяц
+            </button>
+          </div>
+
+          <article
+            class="forecast-days__ten-day-forecast ten-day-forecast"
+          ></article>
+        </div>
       </div>
     </main>
 
@@ -137,6 +159,30 @@
         />
         <p class="hour-weather-card__temp"></p>
       </article>
+    </template>
+
+    <template id="ten-day-forecast-card-template">
+      <button class="ten-day-forecast__card-button button-animated">
+        <article class="ten-day-forecast__card ten-day-card">
+          <p class="ten-day-card__week-day"></p>
+          <time class="ten-day-card__day"></time>
+          <img
+            class="ten-day-card__icon"
+            src="./assets/img/weather/cloudy.svg"
+            alt=""
+          />
+          <div class="ten-day-card__temps">
+            <p
+              id="ten-day-card-lowest-temp"
+              class="ten-day-card__temp"
+            ></p>
+            <p
+              id="ten-day-card-highest-temp"
+              class="ten-day-card__temp"
+            ></p>
+          </div>
+        </article>
+      </button>
     </template>
   </body>
 </html>
