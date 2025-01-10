@@ -100,6 +100,7 @@
               <button
                 id="slide-left"
                 class="hours__slide-button button-animated"
+                disabled
               >
                 <img
                   class="hours__arrow-left hours__arrow"
@@ -130,18 +131,12 @@
     <template id="hour-weather-card-template">
       <li>
         <article class="hourly-weather-cards__card hour-weather-card">
-          <time
-            class="hour-weather-card__time"
-            datetime="2024-12-27 00:00+0800"
-          >
-            00:00
-          </time>
+          <time class="hour-weather-card__time"> </time>
           <img
             class="hour-weather-card__icon"
-            src="./assets/img/weather/cloudy.svg"
             alt=""
           />
-          <p class="hour-weather-card__temp">-18°</p>
+          <p class="hour-weather-card__temp"></p>
         </article>
       </li>
     </template>
