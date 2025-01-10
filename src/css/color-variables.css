@@ -9,6 +9,10 @@
   --selected-day-night: #0e3c53;
   --selected-day-weather: var(--selected-day-evening);
 
+  --forecast-days-button-background-color: #eceef2;
+  --forecast-days-button-background-color-hover: #dfe1e7;
+  --forecast-days-light-gray: #939cb0;
+
   --dark-ashen: #242832;
   --dark-ashen-lightened-by-7: #323846;
 }
