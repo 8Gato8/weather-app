@@ -12,6 +12,7 @@
 @import url('./css/hours.css');
 @import url('./css/hourly-weather-cards.css');
 @import url('./css/hour-weather-card.css');
+@import url('./css/hidden.css');
 
 @font-face {
   font-family: 'Inter';
