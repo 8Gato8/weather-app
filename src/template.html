@@ -144,6 +144,79 @@
           </div>
 
           <article class="ten-day-forecast"></article>
+
+          <article class="thirty-day-forecast hidden">
+            <table class="thirty-day-forecast__table forecast-table">
+              <thead class="forecast-table__head">
+                <tr class="forecat-table__row">
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Пн
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Вт
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Ср
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Чт
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Пт
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Сб
+                  </th>
+                  <th
+                    scope="col"
+                    class="forecast-table__header"
+                  >
+                    Вс
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="forecast-table__body">
+                <tr
+                  id="first-row"
+                  class="forecast-table__row"
+                ></tr>
+                <tr
+                  id="second-row"
+                  class="forecast-table__row"
+                ></tr>
+                <tr
+                  id="third-row"
+                  class="forecast-table__row"
+                ></tr>
+                <tr
+                  id="fourth-row"
+                  class="forecast-table__row"
+                ></tr>
+                <tr
+                  id="fifth-row"
+                  class="forecast-table__row"
+                ></tr>
+              </tbody>
+            </table>
+          </article>
         </div>
       </div>
     </main>
@@ -171,16 +244,47 @@
           />
           <div class="ten-day-card__temps">
             <p
-              id="ten-day-card-lowest-temp"
+              id="ten-day-card-highest-temp"
               class="ten-day-card__temp"
             ></p>
             <p
-              id="ten-day-card-highest-temp"
+              id="ten-day-card-lowest-temp"
               class="ten-day-card__temp"
             ></p>
           </div>
         </article>
       </button>
+    </template>
+
+    <template id="forecast-table-col-template">
+      <td class="forecast-table__col">
+        <button class="thirty-day-forecast__card-button button-animated">
+          <article class="thirty-day-forecast__card thirty-day-card">
+            <time class="thirty-day-card__day">18</time>
+            <div class="thirty-day-card__container">
+              <img
+                class="thirty-day-card__icon"
+                src="./assets/img/weather/snow.svg"
+                alt=""
+              />
+              <div class="thirty-day-card__temps">
+                <p
+                  id="thirty-day-card-highest-temp"
+                  class="thirty-day-card__temp"
+                >
+                  -11°
+                </p>
+                <p
+                  id="thirty-day-card-lowest-temp"
+                  class="thirty-day-card__temp"
+                >
+                  -16°
+                </p>
+              </div>
+            </div>
+          </article>
+        </button>
+      </td>
     </template>
   </body>
 </html>

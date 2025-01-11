@@ -1,0 +1,38 @@
+.thirty-day-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.thirty-day-card_colorless {
+  opacity: 0.3;
+}
+
+.thirty-day-card__container {
+  display: flex;
+  gap: 10px;
+}
+
+.thirty-day-card__day {
+  text-align: left;
+  color: var(--forecast-days-light-gray);
+}
+
+.thirty-day-card__temps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.thirty-day-card__temp:last-child {
+  color: var(--forecast-days-light-gray);
+}
+
+.thirty-day-card__icon {
+  width: 50px;
+  height: 50px;
+}
