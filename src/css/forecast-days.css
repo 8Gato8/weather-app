@@ -1,7 +1,7 @@
 .forecast-days {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   padding: 25px;
   border-radius: 8px;
 
