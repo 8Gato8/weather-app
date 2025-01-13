@@ -4,7 +4,7 @@
 @import url('./css/main.css');
 @import url('./css/header.css');
 @import url('./css/container.css');
-@import url('./css/selected-day-weather.css');
+@import url('./css/selected-day-forecast.css');
 @import url('./css/forecast-days.css');
 @import url('./css/select-period.css');
 @import url('./css/ten-day-forecast.css');
@@ -13,8 +13,8 @@
 @import url('./css/forcast-table.css');
 @import url('./css/thirty-day-card.css');
 @import url('./css/hours.css');
-@import url('./css/hourly-weather-cards.css');
-@import url('./css/hour-weather-card.css');
+@import url('./css/hourly-forecast-cards.css');
+@import url('./css/hour-forecast-card.css');
 @import url('./css/hidden.css');
 
 @font-face {
