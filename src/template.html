@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="./style.css"
     />
-    <title>Weather app</title>
+    <title>forecast app</title>
   </head>
   <body>
     <main class="main">
@@ -30,32 +30,32 @@
       </header>
 
       <div class="container">
-        <section class="selected-day-weather">
-          <div class="selected-day-weather__container">
-            <div class="selected-day-weather__heading-wrapper">
-              <p class="selected-day-weather__address">
+        <section class="selected-day-forecast">
+          <div class="selected-day-forecast__container">
+            <div class="selected-day-forecast__heading-wrapper">
+              <p class="selected-day-forecast__address">
                 Иркутск, Сибирский федеральный округ, Россия
               </p>
-              <div class="selected-day-weather__yesterday-wrapper">
-                <p class="selected-day-weather__current-time current-time">
+              <div class="selected-day-forecast__yesterday-wrapper">
+                <p class="selected-day-forecast__current-time current-time">
                   <span>Сейчас</span>
                   <time datetime="2024-12-27 18:00+0800">22:46. </time>
                 </p>
-                <p class="selected-day-weather__yesterday yesterday">
+                <p class="selected-day-forecast__yesterday yesterday">
                   <span class="yesterday__text">Вчера в это время</span>
                   <span class="yesterday__temp">-11°</span>
                 </p>
               </div>
             </div>
 
-            <div class="selected-day-weather__main-info-wrapper">
-              <p class="selected-day-weather__temp">-18°</p>
+            <div class="selected-day-forecast__main-info-wrapper">
+              <p class="selected-day-forecast__temp">-18°</p>
               <img
-                class="selected-day-weather__icon"
-                src="./assets/img/weather/cloudy.svg"
+                class="selected-day-forecast__icon"
+                src="./assets/img/forecast/cloudy.svg"
                 alt="Облачно"
               />
-              <div class="selected-day-weather__main-text-info main-text-info">
+              <div class="selected-day-forecast__main-text-info main-text-info">
                 <p class="main-text-info__short-description">Пасмурно</p>
                 <p class="main-text-info__feels-like feels-like">
                   <span class="feels-like__text">Ощущается как</span>
@@ -64,8 +64,8 @@
               </div>
             </div>
 
-            <div class="selected-day-weather__additional-info-wrapper">
-              <p class="selected-day-weather__wind wind">
+            <div class="selected-day-forecast__additional-info-wrapper">
+              <p class="selected-day-forecast__wind wind">
                 <img
                   class="wind__icon"
                   src="./assets/img/wind.svg"
@@ -78,7 +78,7 @@
                   alt="Иконка направления ветра"
                 />
               </p>
-              <p class="selected-day-weather__humidity humidity">
+              <p class="selected-day-forecast__humidity humidity">
                 <img
                   class="humidity__icon"
                   src="./assets/img/drop.svg"
@@ -86,7 +86,7 @@
                 />
                 <span class="humidity__text"> 80% </span>
               </p>
-              <p class="selected-day-weather__pressure pressure">
+              <p class="selected-day-forecast__pressure pressure">
                 <img
                   class="pressure__icon"
                   src="./assets/img/pressure.svg"
@@ -96,7 +96,7 @@
               </p>
             </div>
 
-            <div class="selected-day-weather__hours hours">
+            <div class="selected-day-forecast__hours hours">
               <button
                 id="slide-left"
                 class="hours__slide-button button-animated"
@@ -109,7 +109,7 @@
                 />
               </button>
               <div class="hours__slider">
-                <article class="hourly-weather-cards"></article>
+                <article class="hourly-forecast-cards"></article>
               </div>
 
               <button
@@ -221,14 +221,14 @@
       </div>
     </main>
 
-    <template id="hour-weather-card-template">
-      <article class="hourly-weather-cards__card hour-weather-card">
-        <time class="hour-weather-card__time"></time>
+    <template id="hour-forecast-card-template">
+      <article class="hourly-forecast-cards__card hour-forecast-card">
+        <time class="hour-forecast-card__time"></time>
         <img
-          class="hour-weather-card__icon"
+          class="hour-forecast-card__icon"
           alt=""
         />
-        <p class="hour-weather-card__temp"></p>
+        <p class="hour-forecast-card__temp"></p>
       </article>
     </template>
 

@@ -1,29 +1,29 @@
-.selected-day-weather {
-  background-color: var(--selected-day-weather);
+.selected-day-forecast {
+  background-color: var(--selected-day-forecast);
   padding: 30px;
   border-radius: 8px;
 
   color: var(--white);
 }
 
-.selected-day-weather__container {
+.selected-day-forecast__container {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.selected-day-weather__heading-wrapper {
+.selected-day-forecast__heading-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.selected-day-weather__address {
+.selected-day-forecast__address {
   font-size: 1.3rem;
   font-weight: 700;
 }
 
-.selected-day-weather__yesterday-wrapper {
+.selected-day-forecast__yesterday-wrapper {
   display: flex;
   gap: 10px;
 
@@ -31,7 +31,7 @@
   font-weight: 400;
 }
 
-.selected-day-weather__current-time {
+.selected-day-forecast__current-time {
   opacity: 0.7;
 }
 
@@ -39,7 +39,7 @@
   opacity: 0.7;
 }
 
-.selected-day-weather__main-info-wrapper {
+.selected-day-forecast__main-info-wrapper {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -48,16 +48,16 @@
   font-weight: 400;
 }
 
-.selected-day-weather__temp {
+.selected-day-forecast__temp {
   font-size: 4rem;
 }
 
-.selected-day-weather__icon {
+.selected-day-forecast__icon {
   width: 100px;
   height: 50px;
 }
 
-.selected-day-weather__main-text-info {
+.selected-day-forecast__main-text-info {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -67,20 +67,20 @@
   opacity: 0.7;
 }
 
-.selected-day-weather__additional-info-wrapper {
+.selected-day-forecast__additional-info-wrapper {
   display: flex;
   gap: 40px;
 }
 
-.selected-day-weather__wind,
-.selected-day-weather__humidity,
-.selected-day-weather__pressure {
+.selected-day-forecast__wind,
+.selected-day-forecast__humidity,
+.selected-day-forecast__pressure {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.selected-day-weather__hours {
+.selected-day-forecast__hours {
   display: flex;
   justify-content: center;
   align-items: center;
