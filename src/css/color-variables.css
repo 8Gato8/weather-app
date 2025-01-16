@@ -10,6 +10,7 @@
   --selected-day-forecast: var(--selected-day-forecast-evening);
 
   --forecast-days-button-background-color: #eceef2;
+  --forecast-days-button-background-color-darkened: #caced7;
   --forecast-days-button-background-color-hover: #dfe1e7;
   --forecast-days-light-gray: #939cb0;
 
