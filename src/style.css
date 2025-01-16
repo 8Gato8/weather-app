@@ -6,6 +6,7 @@
 @import url('./css/container.css');
 @import url('./css/selected-day-forecast.css');
 @import url('./css/forecast-days.css');
+@import url('./css/forecast-card-button.css');
 @import url('./css/select-period.css');
 @import url('./css/ten-day-forecast.css');
 @import url('./css/ten-day-card.css');
@@ -53,6 +54,10 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }
 
 button:disabled {
