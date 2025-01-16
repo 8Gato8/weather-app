@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.select-period__button_selected {
+  background-color: var(--forecast-days-button-background-color-darkened);
+}
+
 .select-period__button:hover {
   background-color: var(--forecast-days-button-background-color-hover);
 }
