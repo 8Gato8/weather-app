@@ -4,7 +4,7 @@
   border-radius: 8px;
 
   color: var(--white);
-  min-height: 396px;
+  min-height: 430px;
 
   display: flex;
   justify-content: center;
@@ -87,5 +87,5 @@
   border-top: 1px solid rgb(255 255 255 / 0.3);
   padding-top: 25px;
 
-  height: 90px;
+  /* height: 90px; */
 }
