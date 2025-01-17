@@ -1,6 +1,8 @@
 import Forecast from './Forecast';
 
 export function Search() {
+  const forecast = Forecast();
+
   const input = document.querySelector('.search-input') as HTMLInputElement;
   const searchButton = document.querySelector(
     '.header__search-button'
@@ -12,7 +14,7 @@ export function Search() {
 
   function getForecast() {
     if (checkInputValid()) {
-      Forecast(input.value);
+      forecast.update(input.value);
     }
   }
 
@@ -26,5 +28,5 @@ export function Search() {
     }
   });
 
-  Forecast('Москва');
+  forecast.update('Москва');
 }
