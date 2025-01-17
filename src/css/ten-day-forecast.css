@@ -6,6 +6,7 @@
 .ten-day-forecast__list {
   display: flex;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .ten-day-forecast__card-button {
