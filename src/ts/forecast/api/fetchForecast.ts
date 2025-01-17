@@ -19,14 +19,10 @@ export default async function fetchForecast({
 }: IRequestData) {
   const url = `${BASE_URL}/${address}/${date}${searchParams}${params}`;
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`${response.status}`);
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${response.status}`);
 
-    const data = await response.json();
+  const data = await response.json();
 
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  return data;
 }

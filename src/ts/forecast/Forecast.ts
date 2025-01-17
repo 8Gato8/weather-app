@@ -40,9 +40,16 @@ export default function Forecast() {
   }
 
   function TenDay() {
+    const loader = document.querySelector(
+      '#ten-day-loader'
+    ) as HTMLImageElement;
+
     const forecastElement = document.querySelector(
       '.ten-day-forecast'
     ) as HTMLElement;
+    const forecastList = document.querySelector(
+      '.ten-day-forecast__list'
+    ) as HTMLUListElement;
     const cardTemplate = document.querySelector(
       '#ten-day-forecast-card-template'
     ) as HTMLTemplateElement;
@@ -96,15 +103,15 @@ export default function Forecast() {
         highestTempElement.textContent = `${tempmaxRounded}°`;
         lowestTempElement.textContent = `${tempminRounded}°`;
 
-        forecastElement.appendChild(cardButtonElement);
+        forecastList.appendChild(cardButtonElement);
       });
 
-      forecastElement.addEventListener('click', onCardButtonClick);
+      forecastList.addEventListener('click', onCardButtonClick);
     }
 
     function clear() {
-      while (forecastElement.hasChildNodes()) {
-        forecastElement.removeChild(forecastElement.lastChild);
+      while (forecastList.hasChildNodes()) {
+        forecastList.removeChild(forecastList.lastChild);
       }
     }
 
@@ -115,7 +122,20 @@ export default function Forecast() {
         params:
           'include=days&elements=tempmin,tempmax,datetime,icon,conditions',
       };
-      const data = await fetchForecast(request);
+
+      let data = null;
+
+      try {
+        hide(forecastList);
+        show(loader);
+
+        data = await fetchForecast(request);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        hide(loader);
+        show(forecastList);
+      }
 
       renderCards(data.days);
     }
@@ -123,10 +143,17 @@ export default function Forecast() {
   }
 
   function ThirtyDay() {
+    const loader = document.querySelector(
+      '#thirty-day-loader'
+    ) as HTMLImageElement;
+
     const forecastElement = document.querySelector(
       '.thirty-day-forecast'
     ) as HTMLElement;
-    const forecastBody = document.querySelector('.forecast-table__body');
+    const forecastTable = forecastElement.querySelector(
+      '.thirty-day-forecast__table'
+    ) as HTMLTableElement;
+    const forecastBody = forecastTable.querySelector('.forecast-table__body');
     const forecastRowNodeList = forecastBody.querySelectorAll(
       '.forecast-table__row'
     );
@@ -266,7 +293,19 @@ export default function Forecast() {
           'include=days&elements=tempmin,tempmax,datetime,icon,conditions',
       };
 
-      const data = await fetchForecast(request);
+      let data = null;
+
+      try {
+        hide(forecastTable);
+        show(loader);
+
+        data = await fetchForecast(request);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        hide(loader);
+        show(forecastTable);
+      }
 
       renderCards(data.days);
     }

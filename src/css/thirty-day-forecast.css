@@ -1,3 +1,8 @@
+.thirty-day-forecast {
+  display: flex;
+  justify-content: center;
+}
+
 .thirty-day-forecast__table {
   width: 100%;
 }

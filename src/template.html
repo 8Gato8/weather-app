@@ -135,9 +135,23 @@
             </button>
           </div>
 
-          <article class="ten-day-forecast"></article>
+          <article class="ten-day-forecast">
+            <img
+              id="ten-day-loader"
+              class="loader hidden"
+              src="./assets/img/loader.svg"
+              alt="Инонка загрузки"
+            />
+            <ul class="ten-day-forecast__list"></ul>
+          </article>
 
           <article class="thirty-day-forecast hidden">
+            <img
+              id="thirty-day-loader"
+              class="loader hidden"
+              src="./assets/img/loader.svg"
+              alt="Инонка загрузки"
+            />
             <table class="thirty-day-forecast__table forecast-table">
               <thead class="forecast-table__head">
                 <tr class="forecat-table__row">
@@ -212,6 +226,12 @@
         </div>
       </div>
     </main>
+
+    <img
+      class="loader hidden"
+      src="./assets/img/loader.svg"
+      alt="Инонка загрузки"
+    />
 
     <template id="hour-forecast-card-template">
       <article class="hourly-forecast-cards__card hour-forecast-card">
