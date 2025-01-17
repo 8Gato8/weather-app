@@ -4,10 +4,7 @@
   --light-gray: #f1f1f1;
   --main-purple: #4a86a4;
 
-  --selected-day-forecast-morning: #4a86a4;
-  --selected-day-forecast-evening: #236f94;
-  --selected-day-forecast-night: #0e3c53;
-  --selected-day-forecast: var(--selected-day-forecast-evening);
+  --forecast-main-theme: #236f94;
 
   --forecast-days-button-background-color: #eceef2;
   --forecast-days-button-background-color-darkened: #caced7;

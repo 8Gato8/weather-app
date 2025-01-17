@@ -5,7 +5,7 @@
   align-items: center;
 
   padding: 30px 60px;
-  background-color: var(--selected-day-forecast);
+  background-color: var(--forecast-main-theme);
 }
 
 .header__search-input {

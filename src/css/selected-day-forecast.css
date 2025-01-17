@@ -1,5 +1,5 @@
 .selected-day-forecast {
-  background-color: var(--selected-day-forecast);
+  background-color: var(--forecast-main-theme);
   padding: 30px;
   border-radius: 8px;
 
