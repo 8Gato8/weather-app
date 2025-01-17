@@ -1,12 +1,5 @@
 import './style.css';
 
-/* import fetchWeather from './ts/api/fetchWeather';
+import { Search } from './ts/forecast/Search';
 
-const address = 'Irkutsk';
-const daysCount = 'next30days';
-async function getWeather() {
-  const data = await fetchWeather(address, daysCount);
-  console.log(data);
-}
-
-getWeather(); */
+Search();
