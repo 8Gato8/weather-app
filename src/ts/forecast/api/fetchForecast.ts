@@ -1,18 +1,14 @@
-const API_KEY = 'MUDWJGC5JWDQ4FZZ8SMD93KKR';
-/* const API_KEY = 'D9GW7MDHRZ45HXYPHJYLB5GM8'; */
+import type { IRequestData, TFetchForecast } from '../types';
+
+/* const API_KEY = 'MUDWJGC5JWDQ4FZZ8SMD93KKR'; */
+const API_KEY = 'D9GW7MDHRZ45HXYPHJYLB5GM8';
 
 const BASE_URL =
   'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
 const searchParams = `?unitGroup=metric&lang=ru&key=${API_KEY}&`;
 
-export interface IRequestData {
-  address: string;
-  date: string | { from: string; to: string };
-  params?: string;
-}
-
-export default async function fetchForecast({
+export const fetchForecast: TFetchForecast = async function ({
   address,
   date,
   params,
@@ -25,4 +21,4 @@ export default async function fetchForecast({
   const data = await response.json();
 
   return data;
-}
+};
