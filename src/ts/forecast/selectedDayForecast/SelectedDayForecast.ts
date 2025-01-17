@@ -1,15 +1,17 @@
-import type { ISelectedDayForecast, IDay } from '../types';
-import type { IRequestData } from '../api/fetchForecast';
+import type { ISelectedDayForecast, IDay, IRequestData } from '../types';
 
 import HourlyForecast from './HourlyForecast';
 
-import fetchForecast from '../api/fetchForecast';
+import { fetchForecast } from '../api/fetchForecast';
 
 import { ru } from 'date-fns/locale';
 import { parseISO, isToday, format } from 'date-fns';
 import { show, hide, capitalize } from '../utils';
 
 export default function SelectedDayForecast(): ISelectedDayForecast {
+  const loader = document.querySelector(
+    '#selected-day-loader'
+  ) as HTMLImageElement;
   const error = document.querySelector(
     '#selected-day-error'
   ) as HTMLParagraphElement;
@@ -105,6 +107,7 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
     try {
       hide(error);
       hide(forecastContainerElement);
+      show(loader);
 
       const data = await fetchForecast(request);
       const { resolvedAddress, days } = data;
@@ -116,9 +119,11 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
         hourlyForecast.renderHint();
       }
 
+      hide(loader);
       hide(error);
       show(forecastContainerElement);
     } catch (err) {
+      hide(loader);
       if (err.message === '429') {
         error.textContent = 'Слишком много запросов, повторите попытку позже';
       }
