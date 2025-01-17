@@ -1,3 +1,5 @@
+import type { IHandleRequestParams } from './types';
+
 export function show(element: HTMLElement) {
   element.classList.remove('hidden');
 }
@@ -16,4 +18,36 @@ export function disableButton(button: HTMLButtonElement) {
 
 export function capitalize(string: string) {
   return string[0].toUpperCase() + string.slice(1);
+}
+
+export async function handleRequest({
+  parentElement,
+  error,
+  loader,
+  request,
+  fetchForecast,
+  render,
+}: IHandleRequestParams) {
+  try {
+    hide(error);
+    hide(parentElement);
+    show(loader);
+
+    const data = await fetchForecast(request);
+    render(data.days);
+
+    hide(loader);
+    hide(error);
+    show(parentElement);
+  } catch (err) {
+    hide(loader);
+    if (err.message === '429') {
+      error.textContent = 'Слишком много запросов, повторите попытку позже';
+    }
+    if (err.message === '400') {
+      error.textContent =
+        'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+    }
+    show(error);
+  }
 }
