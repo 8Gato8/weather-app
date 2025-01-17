@@ -23,6 +23,10 @@
   padding: 15px;
 }
 
+.search-input:invalid {
+  color: red;
+}
+
 .search-input::-webkit-search-decoration,
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-results-button,

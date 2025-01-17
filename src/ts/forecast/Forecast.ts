@@ -9,7 +9,7 @@ import { ru } from 'date-fns/locale';
 import { getDay, setDate, parseISO, format } from 'date-fns';
 import { show, hide } from './utils';
 
-export default function Forecast() {
+export default function Forecast(address: string) {
   const selectTenDayForecast = document.querySelector(
     '#select-ten-day-forecast'
   );
@@ -36,13 +36,16 @@ export default function Forecast() {
     selectedCard = button;
     selectedCard.classList.add('forecast-card-button_selected');
 
-    selectedDay.getForecast('Irkutsk', button.dataset.date);
+    selectedDay.getForecast(address, button.dataset.date);
   }
 
   function TenDay() {
     const loader = document.querySelector(
       '#ten-day-loader'
     ) as HTMLImageElement;
+    const error = document.querySelector(
+      '#ten-day-error'
+    ) as HTMLParagraphElement;
 
     const forecastElement = document.querySelector(
       '.ten-day-forecast'
@@ -55,6 +58,8 @@ export default function Forecast() {
     ) as HTMLTemplateElement;
 
     function renderCards(days: TDays) {
+      clear();
+
       days.forEach((day) => {
         const { datetime, icon, conditions, tempmin, tempmax } = day;
 
@@ -123,21 +128,28 @@ export default function Forecast() {
           'include=days&elements=tempmin,tempmax,datetime,icon,conditions',
       };
 
-      let data = null;
-
       try {
+        hide(error);
         hide(forecastList);
         show(loader);
 
-        data = await fetchForecast(request);
-      } catch (err) {
-        console.log(err.message);
-      } finally {
-        hide(loader);
-        show(forecastList);
-      }
+        const data = await fetchForecast(request);
+        renderCards(data.days);
 
-      renderCards(data.days);
+        hide(loader);
+        hide(error);
+        show(forecastList);
+      } catch (err) {
+        hide(loader);
+        if (err.message === '429') {
+          error.textContent = 'Слишком много запросов, повторите попытку позже';
+        }
+        if (err.message === '400') {
+          error.textContent =
+            'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+        }
+        show(error);
+      }
     }
     return { forecastElement, getForecast, clear };
   }
@@ -146,6 +158,9 @@ export default function Forecast() {
     const loader = document.querySelector(
       '#thirty-day-loader'
     ) as HTMLImageElement;
+    const error = document.querySelector(
+      '#thirty-day-error'
+    ) as HTMLParagraphElement;
 
     const forecastElement = document.querySelector(
       '.thirty-day-forecast'
@@ -187,6 +202,8 @@ export default function Forecast() {
     }
 
     function renderCards(days: TDays) {
+      clear();
+
       let rowIndex = 0;
       let dayCount = 0;
 
@@ -293,21 +310,28 @@ export default function Forecast() {
           'include=days&elements=tempmin,tempmax,datetime,icon,conditions',
       };
 
-      let data = null;
-
       try {
+        hide(error);
         hide(forecastTable);
         show(loader);
 
-        data = await fetchForecast(request);
-      } catch (err) {
-        console.log(err.message);
-      } finally {
-        hide(loader);
-        show(forecastTable);
-      }
+        const data = await fetchForecast(request);
+        renderCards(data.days);
 
-      renderCards(data.days);
+        hide(loader);
+        hide(error);
+        show(forecastTable);
+      } catch (err) {
+        hide(loader);
+        if (err.message === '429') {
+          error.textContent = 'Слишком много запросов, повторите попытку позже';
+        }
+        if (err.message === '400') {
+          error.textContent =
+            'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+        }
+        show(error);
+      }
     }
     return { forecastElement, getForecast, clear };
   }
@@ -320,10 +344,9 @@ export default function Forecast() {
     selectThirtyDayForecast.classList.remove('select-period__button_selected');
     selectTenDayForecast.classList.add('select-period__button_selected');
 
-    thirtyDay.clear();
     hide(thirtyDay.forecastElement);
 
-    tenDay.getForecast('Irkutsk');
+    tenDay.getForecast(address);
     show(tenDay.forecastElement);
   });
 
@@ -331,13 +354,12 @@ export default function Forecast() {
     selectTenDayForecast.classList.remove('select-period__button_selected');
     selectThirtyDayForecast.classList.add('select-period__button_selected');
 
-    tenDay.clear();
     hide(tenDay.forecastElement);
 
-    thirtyDay.getForecast('Irkutsk');
+    thirtyDay.getForecast(address);
     show(thirtyDay.forecastElement);
   });
 
-  selectedDay.getForecast('Irkutsk', todayISO);
-  tenDay.getForecast('Irkutsk');
+  selectedDay.getForecast(address, todayISO);
+  tenDay.getForecast(address);
 }

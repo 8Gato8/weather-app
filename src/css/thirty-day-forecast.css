@@ -1,6 +1,8 @@
 .thirty-day-forecast {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 165px;
 }
 
 .thirty-day-forecast__table {

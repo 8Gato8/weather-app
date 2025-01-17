@@ -7,10 +7,17 @@ import fetchForecast from '../api/fetchForecast';
 
 import { ru } from 'date-fns/locale';
 import { parseISO, isToday, format } from 'date-fns';
-import { capitalize } from '../utils';
+import { show, hide, capitalize } from '../utils';
 
 export default function SelectedDayForecast(): ISelectedDayForecast {
+  const error = document.querySelector(
+    '#selected-day-error'
+  ) as HTMLParagraphElement;
+
   const forecastElement = document.querySelector('.selected-day-forecast');
+  const forecastContainerElement = document.querySelector(
+    '.selected-day-forecast__container'
+  ) as HTMLDivElement;
   const addressElement = forecastElement.querySelector(
     '.selected-day-forecast__address'
   );
@@ -95,17 +102,32 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
         'elements=temp,feelslike,humidity,pressure,windspeed,winddir,datetime,icon,conditions',
     };
 
-    const data = await fetchForecast(request);
+    try {
+      hide(error);
+      hide(forecastContainerElement);
 
-    const { resolvedAddress, days } = data;
-    render(resolvedAddress, days[0]);
+      const data = await fetchForecast(request);
+      const { resolvedAddress, days } = data;
+      render(resolvedAddress, days[0]);
 
-    if (days[0].hours) {
-      hourlyForecast.renderCards(days);
-      return;
+      if (days[0].hours) {
+        hourlyForecast.renderCards(days);
+      } else {
+        hourlyForecast.renderHint();
+      }
+
+      hide(error);
+      show(forecastContainerElement);
+    } catch (err) {
+      if (err.message === '429') {
+        error.textContent = 'Слишком много запросов, повторите попытку позже';
+      }
+      if (err.message === '400') {
+        error.textContent =
+          'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+      }
+      show(error);
     }
-
-    hourlyForecast.renderHint();
   }
 
   const hourlyForecast = HourlyForecast();
