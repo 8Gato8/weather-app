@@ -6,6 +6,8 @@ export interface ISelectedDayForecast {
   getForecast: (address: string, date: string) => Promise<void>;
 }
 
+export type TOnCardButtonClick = (e: MouseEvent) => void;
+
 interface IHour {
   datetime: string;
   icon: string;
@@ -29,3 +31,29 @@ export interface IDay {
 }
 
 export type TDays = [IDay];
+
+export interface IRequestData {
+  address: string;
+  date: string | { from: string; to: string };
+  params?: string;
+}
+
+interface IForecastData {
+  days: TDays;
+  resolvedAddress: string;
+}
+
+export type TFetchForecast = ({
+  address,
+  date,
+  params,
+}: IRequestData) => Promise<IForecastData>;
+
+export interface IHandleRequestParams {
+  parentElement: HTMLElement;
+  loader: HTMLImageElement;
+  error: HTMLParagraphElement;
+  request: IRequestData;
+  fetchForecast: TFetchForecast;
+  render: (days: TDays) => void;
+}
