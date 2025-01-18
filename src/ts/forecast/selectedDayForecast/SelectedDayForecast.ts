@@ -17,8 +17,11 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
   ) as HTMLParagraphElement;
 
   const forecastElement = document.querySelector('.selected-day-forecast');
-  const forecastContainerElement = document.querySelector(
-    '.selected-day-forecast__container'
+  const forecastHoursElement = document.querySelector(
+    '.selected-day-forecast__hours'
+  ) as HTMLDivElement;
+  const forecastDayContainerElement = document.querySelector(
+    '.selected-day-forecast__day-container'
   ) as HTMLDivElement;
   const addressElement = forecastElement.querySelector(
     '.selected-day-forecast__address'
@@ -106,22 +109,22 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
 
     try {
       hide(error);
-      hide(forecastContainerElement);
+      hide(forecastDayContainerElement);
+      hide(forecastHoursElement);
+
       show(loader);
 
       const data = await fetchForecast(request);
+      show(forecastDayContainerElement);
+      show(forecastHoursElement);
+
       const { resolvedAddress, days } = data;
       render(resolvedAddress, days[0]);
 
-      if (days[0].hours) {
-        hourlyForecast.renderCards(days);
-      } else {
-        hourlyForecast.renderHint();
-      }
+      hourlyForecast.render(days);
 
       hide(loader);
       hide(error);
-      show(forecastContainerElement);
     } catch (err) {
       hide(loader);
       if (err.message === '429') {
