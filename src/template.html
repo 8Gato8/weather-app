@@ -97,38 +97,37 @@
                   <span class="pressure__text"></span>
                 </p>
               </div>
-            </div>
+              <div class="selected-day-forecast__hours hours">
+                <button
+                  id="slide-left"
+                  class="hours__slide-button button-animated"
+                  disabled
+                >
+                  <img
+                    class="hours__arrow-left hours__arrow"
+                    src="./assets/img/arrow.svg"
+                    alt="Иконка слайда влево"
+                  />
+                </button>
+                <div class="hours__slider">
+                  <article class="hourly-forecast-cards"></article>
+                </div>
 
-            <div class="selected-day-forecast__hours hours hidden">
-              <button
-                id="slide-left"
-                class="hours__slide-button button-animated"
-                disabled
-              >
-                <img
-                  class="hours__arrow-left hours__arrow"
-                  src="./assets/img/arrow.svg"
-                  alt="Иконка слайда влево"
-                />
-              </button>
-              <div class="hours__slider">
-                <article class="hourly-forecast-cards"></article>
+                <p class="hours__hint hidden">
+                  Нет данных о почасовой погоде на выбранный день
+                </p>
+
+                <button
+                  id="slide-right"
+                  class="hours__slide-button button-animated"
+                >
+                  <img
+                    class="hours__arrow-right hours__arrow"
+                    src="./assets/img/arrow.svg"
+                    alt="Иконка слайда вправо"
+                  />
+                </button>
               </div>
-
-              <p class="hours__hint hidden">
-                Нет данных о почасовой погоде на выбранный день
-              </p>
-
-              <button
-                id="slide-right"
-                class="hours__slide-button button-animated"
-              >
-                <img
-                  class="hours__arrow-right hours__arrow"
-                  src="./assets/img/arrow.svg"
-                  alt="Иконка слайда вправо"
-                />
-              </button>
             </div>
           </div>
         </section>

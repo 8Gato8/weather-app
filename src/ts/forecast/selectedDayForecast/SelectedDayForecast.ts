@@ -17,9 +17,6 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
   ) as HTMLParagraphElement;
 
   const forecastElement = document.querySelector('.selected-day-forecast');
-  const forecastHoursElement = document.querySelector(
-    '.selected-day-forecast__hours'
-  ) as HTMLDivElement;
   const forecastDayContainerElement = document.querySelector(
     '.selected-day-forecast__day-container'
   ) as HTMLDivElement;
@@ -110,13 +107,10 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
     try {
       hide(error);
       hide(forecastDayContainerElement);
-      hide(forecastHoursElement);
-
       show(loader);
 
       const data = await fetchForecast(request);
       show(forecastDayContainerElement);
-      show(forecastHoursElement);
 
       const { resolvedAddress, days } = data;
       render(resolvedAddress, days[0]);
