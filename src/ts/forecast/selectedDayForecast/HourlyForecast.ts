@@ -5,10 +5,10 @@ import { enableButton, disableButton, show, hide } from '../utils';
 import { getHours } from 'date-fns';
 
 export default function HourlyForecast() {
-  const hoursHint = document.querySelector(
+  const hintElement = document.querySelector(
     '.hours__hint'
   ) as HTMLParagraphElement;
-  const hoursSlider = document.querySelector(
+  const sliderElement = document.querySelector(
     '.hours__slider'
   ) as HTMLDivElement;
   const hourlyList = document.querySelector(
@@ -30,13 +30,20 @@ export default function HourlyForecast() {
     }
   }
 
-  function renderCards(days: TDays) {
-    hide(hoursHint);
-    show(hoursSlider);
+  function render(days: TDays) {
+    if (!days[0].hours) {
+      show(hintElement);
+      hide(sliderElement);
+
+      return;
+    }
+
+    clearList();
+
+    hide(hintElement);
+    show(sliderElement);
 
     let cardsNumber = 0;
-
-    if (hourlyList.hasChildNodes()) clearList();
 
     days.forEach((day, index) => {
       let hours = [];
@@ -89,11 +96,6 @@ export default function HourlyForecast() {
     slider.update(cardsNumber);
   }
 
-  function renderHint() {
-    hide(hoursSlider);
-    show(hoursHint);
-  }
-
   function Slider(): ISlider {
     const gap = parseInt(
       getComputedStyle(document.body).getPropertyValue('--hourly-card-gap')
@@ -106,8 +108,7 @@ export default function HourlyForecast() {
     let cardsNumber = 0;
     let hourlyListWidth = 0;
     let displayAreaWidth = 0;
-
-    const sliderWidth = parseInt(getComputedStyle(hoursSlider).width);
+    let sliderWidth = 0;
 
     function resetListPosition() {
       hourlyList.style.left = '0';
@@ -116,6 +117,7 @@ export default function HourlyForecast() {
     }
 
     function calculateOptions() {
+      sliderWidth = parseInt(getComputedStyle(sliderElement).width);
       hourlyListWidth = (width + gap) * cardsNumber - gap;
       displayAreaWidth = -(hourlyListWidth - sliderWidth);
     }
@@ -173,10 +175,14 @@ export default function HourlyForecast() {
       }
     });
 
+    addEventListener('resize', () => {
+      update(cardsNumber);
+    });
+
     return { update };
   }
 
   const slider = Slider();
 
-  return { renderCards, renderHint };
+  return { render };
 }
