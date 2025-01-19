@@ -1,4 +1,9 @@
-import type { TDays, TOnCardButtonClick, IRequestData } from './types';
+import type {
+  IForecastForDays,
+  TDays,
+  TOnCardButtonClick,
+  IRequestData,
+} from './types';
 
 import { fetchForecast } from './api/fetchForecast';
 
@@ -6,7 +11,9 @@ import { ru } from 'date-fns/locale';
 import { parseISO, format } from 'date-fns';
 import { handleRequest } from './utils';
 
-export default function TenDay(onCardButtonClick: TOnCardButtonClick) {
+export default function TenDay(
+  onCardButtonClick: TOnCardButtonClick
+): IForecastForDays {
   const loader = document.querySelector('#ten-day-loader') as HTMLImageElement;
   const error = document.querySelector(
     '#ten-day-error'

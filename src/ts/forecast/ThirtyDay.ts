@@ -1,4 +1,9 @@
-import type { TDays, TOnCardButtonClick, IRequestData } from './types';
+import type {
+  IForecastForDays,
+  TDays,
+  TOnCardButtonClick,
+  IRequestData,
+} from './types';
 
 import { fetchForecast } from './api/fetchForecast';
 
@@ -9,7 +14,7 @@ import { handleRequest } from './utils';
 export default function ThirtyDay(
   today: Date,
   onCardButtonClick: TOnCardButtonClick
-) {
+): IForecastForDays {
   const loader = document.querySelector(
     '#thirty-day-loader'
   ) as HTMLImageElement;
