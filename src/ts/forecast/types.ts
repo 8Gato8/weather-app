@@ -6,6 +6,12 @@ export interface ISelectedDayForecast {
   getForecast: (address: string, date: string) => Promise<void>;
 }
 
+export interface IForecastForDays {
+  forecastElement: HTMLElement;
+  getForecast: (address: string) => Promise<void>;
+  clear: () => void;
+}
+
 export type TOnCardButtonClick = (e: MouseEvent) => void;
 
 interface IHour {
@@ -56,4 +62,11 @@ export interface IHandleRequestParams {
   request: IRequestData;
   fetchForecast: TFetchForecast;
   render: (days: TDays) => void;
+}
+
+export interface IForecastSelectionParams {
+  buttonToHighlight: HTMLButtonElement;
+  buttonToDefault: HTMLButtonElement;
+  forecastToShow: IForecastForDays;
+  forecastToHide: IForecastForDays;
 }
