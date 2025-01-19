@@ -1,5 +1,7 @@
 import type { TOnCardButtonClick } from './types';
 
+import type { IForecastSelectionParams } from './types';
+
 import TenDay from './TenDay';
 import ThirtyDay from './ThirtyDay';
 import SelectedDayForecast from './selectedDayForecast/SelectedDayForecast';
@@ -13,10 +15,10 @@ export default function Forecast() {
 
   const selectTenDayForecast = document.querySelector(
     '#select-ten-day-forecast'
-  );
+  ) as HTMLButtonElement;
   const selectThirtyDayForecast = document.querySelector(
     '#select-thirty-day-forecast'
-  );
+  ) as HTMLButtonElement;
 
   let selectedCard: HTMLButtonElement | null = null;
 
@@ -44,25 +46,38 @@ export default function Forecast() {
   const tenDay = TenDay(onCardButtonClick);
   const thirtyDay = ThirtyDay(today, onCardButtonClick);
 
-  selectTenDayForecast.addEventListener('click', () => {
-    selectThirtyDayForecast.classList.remove('select-period__button_selected');
-    selectTenDayForecast.classList.add('select-period__button_selected');
+  function handleForecastSelection({
+    buttonToHighlight,
+    buttonToDefault,
+    forecastToShow,
+    forecastToHide,
+  }: IForecastSelectionParams) {
+    buttonToDefault.classList.remove('select-period__button_selected');
+    buttonToHighlight.classList.add('select-period__button_selected');
 
-    hide(thirtyDay.forecastElement);
+    hide(forecastToHide.forecastElement);
 
-    tenDay.getForecast(address);
-    show(tenDay.forecastElement);
-  });
+    forecastToShow.getForecast(address);
+    show(forecastToShow.forecastElement);
+  }
 
-  selectThirtyDayForecast.addEventListener('click', () => {
-    selectTenDayForecast.classList.remove('select-period__button_selected');
-    selectThirtyDayForecast.classList.add('select-period__button_selected');
+  selectTenDayForecast.addEventListener('click', () =>
+    handleForecastSelection({
+      buttonToHighlight: selectTenDayForecast,
+      buttonToDefault: selectThirtyDayForecast,
+      forecastToShow: tenDay,
+      forecastToHide: thirtyDay,
+    })
+  );
 
-    hide(tenDay.forecastElement);
-
-    thirtyDay.getForecast(address);
-    show(thirtyDay.forecastElement);
-  });
+  selectThirtyDayForecast.addEventListener('click', () =>
+    handleForecastSelection({
+      buttonToHighlight: selectThirtyDayForecast,
+      buttonToDefault: selectTenDayForecast,
+      forecastToShow: thirtyDay,
+      forecastToHide: tenDay,
+    })
+  );
 
   function getInitialForecast(address: string) {
     selectedDay.getForecast(address, todayISO);
