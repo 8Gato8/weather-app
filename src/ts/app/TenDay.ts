@@ -8,11 +8,12 @@ import type {
 import { fetchForecast } from './api/fetchForecast';
 
 import { ru } from 'date-fns/locale';
-import { parseISO, format } from 'date-fns';
-import { handleRequest } from './utils';
+import { parseISO, isToday, format } from 'date-fns';
+import { handleRequest, highlightButton } from './utils';
 
 export default function TenDay(
-  onCardButtonClick: TOnCardButtonClick
+  onCardButtonClick: TOnCardButtonClick,
+  selectedCardButton: (button: HTMLButtonElement) => void
 ): IForecastForDays {
   const loader = document.querySelector('#ten-day-loader') as HTMLImageElement;
   const error = document.querySelector(
@@ -79,6 +80,11 @@ export default function TenDay(
 
       highestTempElement.textContent = `${tempmaxRounded}°`;
       lowestTempElement.textContent = `${tempminRounded}°`;
+
+      if (isToday(date)) {
+        selectedCardButton(cardButtonElement);
+        highlightButton(cardButtonElement);
+      }
 
       forecastList.appendChild(cardButtonElement);
     });

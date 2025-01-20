@@ -8,12 +8,13 @@ import type {
 import { fetchForecast } from './api/fetchForecast';
 
 import { ru } from 'date-fns/locale';
-import { parseISO, setDate, getDay, format } from 'date-fns';
-import { handleRequest } from './utils';
+import { parseISO, setDate, getDay, isToday, format } from 'date-fns';
+import { handleRequest, highlightButton } from './utils';
 
 export default function ThirtyDay(
   today: Date,
-  onCardButtonClick: TOnCardButtonClick
+  onCardButtonClick: TOnCardButtonClick,
+  selectedCardButton: (button: HTMLButtonElement) => void
 ): IForecastForDays {
   const loader = document.querySelector(
     '#thirty-day-loader'
@@ -123,6 +124,11 @@ export default function ThirtyDay(
       lowestTempElement.textContent = `${tempminRounded}°`;
 
       forecastRowNodeList[rowIndex].appendChild(forecastColElement);
+
+      if (isToday(date)) {
+        selectedCardButton(cardButtonElement);
+        highlightButton(cardButtonElement);
+      }
 
       if (dayCount % 7 === 0) rowIndex++;
     });

@@ -20,6 +20,14 @@ export function capitalize(string: string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
+export function highlightButton(button: HTMLButtonElement) {
+  button.classList.add('forecast-card-button_selected');
+}
+
+export function removeHighlightFromButton(button: HTMLButtonElement) {
+  button.classList.remove('forecast-card-button_selected');
+}
+
 export async function handleRequest({
   parentElement,
   error,
