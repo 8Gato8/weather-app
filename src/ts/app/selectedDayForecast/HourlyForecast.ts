@@ -2,8 +2,6 @@ import type { TDays, ISlider } from '../types';
 
 import { enableButton, disableButton, show, hide } from '../utils';
 
-import { getHours } from 'date-fns';
-
 export default function HourlyForecast() {
   const hintElement = document.querySelector(
     '.hours__hint'
@@ -30,7 +28,7 @@ export default function HourlyForecast() {
     }
   }
 
-  function render(days: TDays) {
+  function render(days: TDays, currentTime?: string) {
     if (!days[0].hours) {
       show(hintElement);
       hide(sliderElement);
@@ -49,7 +47,7 @@ export default function HourlyForecast() {
       let hours = [];
 
       if (index === 0 && days.length > 1) {
-        const hourNow = getHours(new Date());
+        const hourNow = +currentTime.slice(0, 2) + 1;
         hours = day.hours.slice(hourNow);
       } else {
         hours = day.hours;

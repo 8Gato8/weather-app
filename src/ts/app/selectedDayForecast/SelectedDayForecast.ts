@@ -121,11 +121,11 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
           ...currentConditions,
           datetime: days[0].datetime,
         });
+        hourlyForecast.render(days, currentConditions.datetime);
       } else {
         render(resolvedAddress, days[0]);
+        hourlyForecast.render(days);
       }
-
-      hourlyForecast.render(days);
 
       hide(loader);
       hide(error);
