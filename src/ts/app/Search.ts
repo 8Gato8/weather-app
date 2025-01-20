@@ -3,15 +3,19 @@ import { show, hide } from './utils';
 
 export default function Search(forecast: IForecast) {
   const input = document.querySelector('.search-input') as HTMLInputElement;
-  const searchButton = document.querySelector(
-    '.header__search-button'
-  ) as HTMLButtonElement;
+  const searchForm = document.querySelector('.search-form') as HTMLFormElement;
   const clearButton = document.querySelector(
-    '.header__clear-search-input'
+    '.search-form__clear-input'
   ) as HTMLButtonElement;
 
-  function checkInputValid() {
-    return input.validity.valid;
+  function validatePattern() {
+    if (input.validity.patternMismatch) {
+      input.setCustomValidity(
+        'Название содержать только буквы (не менее 2) в формате "name", "name name" или "name-name"'
+      );
+    } else {
+      input.setCustomValidity('');
+    }
   }
 
   function switchClearButtonVisibility() {
@@ -19,27 +23,27 @@ export default function Search(forecast: IForecast) {
     else hide(clearButton);
   }
 
-  function getForecast() {
-    if (checkInputValid()) {
+  function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+
+    if (input.checkValidity()) {
       forecast.update(input.value);
     }
+  }
+
+  function handleClear() {
+    clearInput();
+    hide(clearButton);
   }
 
   function clearInput() {
     input.value = '';
   }
 
-  input.addEventListener('input', checkInputValid);
+  input.addEventListener('input', validatePattern);
   input.addEventListener('input', switchClearButtonVisibility);
-  searchButton.addEventListener('click', getForecast);
-  clearButton.addEventListener('click', clearInput);
-  document.addEventListener('keydown', (e) => {
-    const keyName = e.key;
-
-    if (keyName === 'Enter') {
-      getForecast();
-    }
-  });
+  searchForm.addEventListener('submit', handleSubmit);
+  clearButton.addEventListener('click', handleClear);
 
   forecast.update('Москва');
 }
