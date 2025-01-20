@@ -15,14 +15,20 @@
   <body>
     <main class="main">
       <header class="header">
-        <input
-          class="header__search-input search-input"
-          required
-          type="search"
-          placeholder="Введите населённый пункт"
-          pattern="[A-za-zА-яа-я]+(-| )?[A-za-zА-яа-я]+"
-          minlength="2"
-        />
+        <div class="header__search-input-container">
+          <input
+            class="header__search-input search-input"
+            required
+            type="search"
+            placeholder="Введите населённый пункт"
+            pattern="[A-za-zА-яа-я]+(-| )?[A-za-zА-яа-я]+"
+            minlength="2"
+          />
+          <button
+            class="header__clear-search-input button-animated hidden"
+            type="button"
+          ></button>
+        </div>
         <button
           class="header__search-button button-animated"
           type="button"

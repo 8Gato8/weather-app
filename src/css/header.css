@@ -9,11 +9,33 @@
   background-color: var(--forecast-main-theme);
 }
 
-.header__search-input {
+.header__search-input-container {
+  position: relative;
   max-width: 800px;
   min-width: 190px;
 
   flex: 1;
+}
+
+.header__search-input {
+  width: 100%;
+}
+
+.header__clear-search-input {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background-image: url('../assets/img/close.svg');
+}
+
+.header__clear-search-input:hover {
+  transform: scale(1.1);
+}
+
+.header__clear-search-input:active {
+  transform: scale(0.9);
 }
 
 .search-input {
