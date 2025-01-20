@@ -18,3 +18,8 @@
 .hours__arrow-right {
   transform: rotate(180deg);
 }
+
+.hours__hint {
+  flex: 1;
+  text-align: center;
+}
