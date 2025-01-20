@@ -57,12 +57,14 @@ export default function Forecast() {
     buttonToDefault,
     forecastToShow,
     forecastToHide,
+    address,
   }: IForecastSelectionParams) {
     buttonToDefault.classList.remove('select-period__button_selected');
     buttonToHighlight.classList.add('select-period__button_selected');
 
     hide(forecastToHide.forecastElement);
 
+    selectedDay.getForecast(address, todayISO);
     forecastToShow.getForecast(address);
     show(forecastToShow.forecastElement);
   }
@@ -73,8 +75,8 @@ export default function Forecast() {
       buttonToDefault: selectThirtyDayForecast,
       forecastToShow: tenDay,
       forecastToHide: thirtyDay,
+      address,
     });
-    selectedDay.getForecast(address, todayISO);
   });
 
   selectThirtyDayForecast.addEventListener('click', () => {
@@ -83,18 +85,19 @@ export default function Forecast() {
       buttonToDefault: selectTenDayForecast,
       forecastToShow: thirtyDay,
       forecastToHide: tenDay,
+      address,
     });
-    selectedDay.getForecast(address, todayISO);
   });
-
-  function getInitialForecast(address: string) {
-    selectedDay.getForecast(address, todayISO);
-    tenDay.getForecast(address);
-  }
 
   function update(newValue: string) {
     address = newValue;
-    getInitialForecast(address);
+    handleForecastSelection({
+      buttonToHighlight: selectTenDayForecast,
+      buttonToDefault: selectThirtyDayForecast,
+      forecastToShow: tenDay,
+      forecastToHide: thirtyDay,
+      address,
+    });
   }
 
   return { update };

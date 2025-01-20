@@ -73,4 +73,5 @@ export interface IForecastSelectionParams {
   buttonToDefault: HTMLButtonElement;
   forecastToShow: IForecastForDays;
   forecastToHide: IForecastForDays;
+  address: string;
 }
