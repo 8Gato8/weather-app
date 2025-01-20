@@ -112,8 +112,18 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
       const data = await fetchForecast(request);
       show(forecastDayContainerElement);
 
-      const { resolvedAddress, days } = data;
-      render(resolvedAddress, days[0]);
+      const { resolvedAddress, currentConditions, days } = data;
+
+      console.log(data);
+
+      if (currentConditions) {
+        render(resolvedAddress, {
+          ...currentConditions,
+          datetime: days[0].datetime,
+        });
+      } else {
+        render(resolvedAddress, days[0]);
+      }
 
       hourlyForecast.render(days);
 

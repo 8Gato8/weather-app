@@ -26,7 +26,7 @@ interface IHour {
 }
 
 export interface IDay {
-  hours: [IHour];
+  hours?: [IHour];
   datetime: string;
   icon: string;
   conditions: string;
@@ -50,6 +50,7 @@ export interface IRequestData {
 
 interface IForecastData {
   days: TDays;
+  currentConditions?: IDay;
   resolvedAddress: string;
 }
 
