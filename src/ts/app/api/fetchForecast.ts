@@ -1,9 +1,5 @@
 import type { IRequestData, TFetchForecast } from '../types';
-
-const API_KEY = 'D9GW7MDHRZ45HXYPHJYLB5GM8';
-
-const BASE_URL =
-  'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+import { API_KEY, BASE_URL } from '../constants';
 
 const searchParams = `?unitGroup=metric&lang=ru&key=${API_KEY}&`;
 

@@ -1,3 +1,7 @@
+export const API_KEY = 'MUDWJGC5JWDQ4FZZ8SMD93KKR';
+export const BASE_URL =
+  'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+
 export const TOO_MANY_REQUESTS_CODE = '429';
 export const TOO_MANY_REQUESTS_MESSAGE =
   'Слишком много запросов, повторите попытку позже';
