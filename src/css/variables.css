@@ -13,4 +13,7 @@
 
   --dark-ashen: #242832;
   --dark-ashen-lightened-by-7: #323846;
+
+  --hourly-card-gap: 15px;
+  --hourly-card-width: 50px;
 }
