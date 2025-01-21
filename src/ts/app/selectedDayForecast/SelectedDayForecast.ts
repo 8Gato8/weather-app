@@ -114,8 +114,6 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
 
       const { resolvedAddress, currentConditions, days } = data;
 
-      console.log(data);
-
       if (currentConditions) {
         render(resolvedAddress, {
           ...currentConditions,
