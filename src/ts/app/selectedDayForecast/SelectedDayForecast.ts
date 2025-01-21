@@ -1,4 +1,10 @@
 import type { ISelectedDayForecast, IDay, IRequestData } from '../types';
+import {
+  TOO_MANY_REQUESTS_CODE,
+  TOO_MANY_REQUESTS_MESSAGE,
+  BAD_REQUEST_CODE,
+  BAD_REQUEST_MESSAGE,
+} from '../constants';
 
 import HourlyForecast from './HourlyForecast';
 
@@ -129,12 +135,11 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
       hide(error);
     } catch (err) {
       hide(loader);
-      if (err.message === '429') {
-        error.textContent = 'Слишком много запросов, повторите попытку позже';
+      if (err.message === TOO_MANY_REQUESTS_CODE) {
+        error.textContent = TOO_MANY_REQUESTS_MESSAGE;
       }
-      if (err.message === '400') {
-        error.textContent =
-          'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+      if (err.message === BAD_REQUEST_CODE) {
+        error.textContent = BAD_REQUEST_MESSAGE;
       }
       show(error);
     }

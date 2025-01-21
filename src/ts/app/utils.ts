@@ -1,19 +1,28 @@
 import type { IHandleRequestParams } from './types';
+import {
+  HIDDEN_CLASS,
+  DISABLED_CLASS,
+  SELECTED_CARD_CLASS,
+  TOO_MANY_REQUESTS_CODE,
+  TOO_MANY_REQUESTS_MESSAGE,
+  BAD_REQUEST_CODE,
+  BAD_REQUEST_MESSAGE,
+} from './constants';
 
 export function show(element: HTMLElement) {
-  element.classList.remove('hidden');
+  element.classList.remove(HIDDEN_CLASS);
 }
 
 export function hide(element: HTMLElement) {
-  element.classList.add('hidden');
+  element.classList.add(HIDDEN_CLASS);
 }
 
 export function enableButton(button: HTMLButtonElement) {
-  button.removeAttribute('disabled');
+  button.removeAttribute(DISABLED_CLASS);
 }
 
 export function disableButton(button: HTMLButtonElement) {
-  button.setAttribute('disabled', '');
+  button.setAttribute(DISABLED_CLASS, '');
 }
 
 export function capitalize(string: string) {
@@ -21,11 +30,11 @@ export function capitalize(string: string) {
 }
 
 export function highlightButton(button: HTMLButtonElement) {
-  button.classList.add('forecast-card-button_selected');
+  button.classList.add(SELECTED_CARD_CLASS);
 }
 
 export function removeHighlightFromButton(button: HTMLButtonElement) {
-  button.classList.remove('forecast-card-button_selected');
+  button.classList.remove(SELECTED_CARD_CLASS);
 }
 
 export async function handleRequest({
@@ -49,12 +58,11 @@ export async function handleRequest({
     show(parentElement);
   } catch (err) {
     hide(loader);
-    if (err.message === '429') {
-      error.textContent = 'Слишком много запросов, повторите попытку позже';
+    if (err.message === TOO_MANY_REQUESTS_CODE) {
+      error.textContent = TOO_MANY_REQUESTS_MESSAGE;
     }
-    if (err.message === '400') {
-      error.textContent =
-        'По вашему запросу ничего не найдено, попробуйте поискать что-нибудь другое';
+    if (err.message === BAD_REQUEST_CODE) {
+      error.textContent = BAD_REQUEST_MESSAGE;
     }
     show(error);
   }

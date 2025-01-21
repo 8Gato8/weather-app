@@ -1,4 +1,5 @@
 import type { IForecast } from './types';
+import { INVALID_PATTERN_MESSAGE } from './constants';
 import { show, hide } from './utils';
 
 export default function Search(forecast: IForecast) {
@@ -10,9 +11,7 @@ export default function Search(forecast: IForecast) {
 
   function validatePattern() {
     if (input.validity.patternMismatch) {
-      input.setCustomValidity(
-        'Название содержать только буквы (не менее 2) в формате "name", "name name" или "name-name"'
-      );
+      input.setCustomValidity(INVALID_PATTERN_MESSAGE);
     } else {
       input.setCustomValidity('');
     }
