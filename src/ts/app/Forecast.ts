@@ -46,6 +46,7 @@ export default function Forecast() {
     highlightButton(selectedCardButton);
 
     selectedDay.getForecast(address, button.dataset.date);
+    document.body.scrollIntoView(true);
   };
 
   const selectedDay = SelectedDayForecast();
