@@ -6,8 +6,7 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
-    "target": "ES2020",
-    "allowJs": true
+    "target": "ES2020"
   },
-  "include": ["src", "index.d.ts"]
+  "include": ["src"]
 }
