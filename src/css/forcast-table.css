@@ -1,6 +1,6 @@
 .forecast-table {
   table-layout: fixed;
-  border-spacing: 5px 8px;
+  border-collapse: collapse;
 }
 
 .forecast-table__head {
