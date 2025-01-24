@@ -1,20 +1,19 @@
 import type {
   IForecastForDays,
   TDays,
-  IDay,
   TOnCardButtonClick,
   IRequestData,
+  TFormatDaysData,
 } from './types';
 
 import { fetchForecast } from './api/fetchForecast';
-
-import { ru } from 'date-fns/locale';
-import { parseISO, isToday, format } from 'date-fns';
+import { isToday } from 'date-fns';
 import { handleRequest, highlightButton } from './utils';
 
 export default function TenDay(
   onCardButtonClick: TOnCardButtonClick,
-  setSelectedCardButton: (button: HTMLButtonElement) => void
+  setSelectedCardButton: (button: HTMLButtonElement) => void,
+  formatDaysData: TFormatDaysData
 ): IForecastForDays {
   const loader = document.querySelector('#ten-day-loader') as HTMLImageElement;
   const error = document.querySelector(
@@ -31,31 +30,9 @@ export default function TenDay(
     '#ten-day-forecast-card-template'
   ) as HTMLTemplateElement;
 
-  function formatDaysData(day: IDay) {
-    const { datetime, tempmin, tempmax } = day;
-
-    const date = parseISO(datetime);
-    const weekday = format(date, 'eeeeee', { locale: ru });
-    const dayData = format(date, 'd', { locale: ru });
-    const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
-    const tempminRounded = Math.round(tempmin);
-    const tempmaxRounded = Math.round(tempmax);
-
-    return {
-      ...day,
-      date,
-      datetime,
-      weekday,
-      dayData,
-      month,
-      tempminRounded,
-      tempmaxRounded,
-    };
-  }
-
   function createCards(days: TDays) {
     days.forEach((day) => {
-      const formattedData = formatDaysData(day);
+      const formattedData = formatDaysData(day, { weekday: true });
 
       const {
         date,
