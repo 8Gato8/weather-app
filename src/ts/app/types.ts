@@ -66,7 +66,7 @@ export interface IHandleRequestParams {
   error: HTMLParagraphElement;
   request: IRequestData;
   fetchForecast: TFetchForecast;
-  render: (days: TDays) => void;
+  handleCardsCreation: (days: TDays) => void;
 }
 
 export interface IForecastSelectionParams {
@@ -76,3 +76,20 @@ export interface IForecastSelectionParams {
   forecastToHide: IForecastForDays;
   address: string;
 }
+
+export type TFormatDaysData = (
+  day: IDay,
+  options?: {
+    weekday: boolean;
+  }
+) => {
+  date: Date;
+  datetime: string;
+  dayData: string;
+  month: string;
+  conditions: string;
+  icon: string;
+  tempminRounded: number;
+  tempmaxRounded: number;
+  weekday?: string;
+};
