@@ -145,10 +145,10 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
         },
         resolvedAddress
       );
-      hourlyForecast.render(days, currentConditions.datetime);
+      hourlyForecast.handleCardsCreation(days, currentConditions.datetime);
     } else {
       createCard(firstDay, resolvedAddress);
-      hourlyForecast.render(days);
+      hourlyForecast.handleCardsCreation(days);
     }
   }
 

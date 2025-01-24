@@ -1,4 +1,4 @@
-import type { TDays, ISlider } from '../types';
+import type { TDays, ISlider, IHour, IDay } from '../types';
 
 import { enableButton, disableButton, show, hide } from '../utils';
 
@@ -28,8 +28,22 @@ export default function HourlyForecast() {
     }
   }
 
-  function render(days: TDays, currentTime?: string) {
-    if (!days[0].hours) {
+  function formatHoursData(hour: IHour) {
+    const { datetime, temp } = hour;
+
+    const hours = `${datetime.slice(0, 2)}:00`;
+
+    return {
+      ...hour,
+      hours,
+      temp: Math.round(temp),
+    };
+  }
+
+  function handleCardsCreation(days: TDays, currentTime?: string) {
+    const hasHoursData = days[0].hours;
+
+    if (!hasHoursData) {
       show(hintElement);
       hide(sliderElement);
 
@@ -41,22 +55,34 @@ export default function HourlyForecast() {
     hide(hintElement);
     show(sliderElement);
 
-    let cardsNumber = 0;
+    createCards(days, currentTime);
+  }
 
-    days.forEach((day, index) => {
-      let hours = [];
+  function createHoursArray(day: IDay, dayIndex: number, currentTime?: string) {
+    let hours = [];
 
-      if (index === 0 && days.length > 1) {
-        const hourNow = +currentTime.slice(0, 2) + 1;
-        hours = day.hours.slice(hourNow);
-      } else {
-        hours = day.hours;
-      }
+    const isFirstDay = dayIndex === 0;
 
-      cardsNumber += hours.length;
+    if (isFirstDay && currentTime) {
+      const hourNow = +currentTime.slice(0, 2) + 1;
+      hours = day.hours.slice(hourNow);
+    } else {
+      hours = day.hours;
+    }
+
+    return hours;
+  }
+
+  function createCards(days: TDays, currentTime?: string) {
+    let cardsCount = 0;
+
+    days.forEach((day, dayIndex) => {
+      const hours = createHoursArray(day, dayIndex, currentTime);
+
+      cardsCount += hours.length;
 
       hours.forEach((hour) => {
-        const { datetime, icon, conditions, temp } = hour;
+        const { hours, icon, conditions, temp } = formatHoursData(hour);
 
         const clone = cardTemplate.content.cloneNode(true) as DocumentFragment;
 
@@ -72,26 +98,21 @@ export default function HourlyForecast() {
           '.hour-forecast-card__temp'
         );
 
-        const hours = `${datetime.slice(0, 2)}:00`;
+        timeElement.textContent = hours.toString();
+        timeElement.dateTime = hours.toString();
 
-        const time = hours;
-        timeElement.textContent = time.toString();
-        timeElement.dateTime = time.toString();
-
-        const iconName = icon;
-        import(`../../../assets/img/forecast/${iconName}.svg`).then(
+        import(`../../../assets/img/forecast/${icon}.svg`).then(
           (res) => (iconElement.src = res.default)
         );
         iconElement.alt = conditions;
 
-        const tempRounded = Math.round(temp);
-        tempElement.textContent = `${tempRounded}°`;
+        tempElement.textContent = `${temp}°`;
 
         hourlyList.append(cardElement);
       });
     });
 
-    slider.update(cardsNumber);
+    slider.update(cardsCount);
   }
 
   function Slider(): ISlider {
@@ -103,7 +124,7 @@ export default function HourlyForecast() {
     );
     const step = (width + gap) * 3;
 
-    let cardsNumber = 0;
+    let cardsCount = 0;
     let hourlyListWidth = 0;
     let displayAreaWidth = 0;
     let sliderWidth = 0;
@@ -116,12 +137,12 @@ export default function HourlyForecast() {
 
     function calculateOptions() {
       sliderWidth = parseInt(getComputedStyle(sliderElement).width);
-      hourlyListWidth = (width + gap) * cardsNumber - gap;
+      hourlyListWidth = (width + gap) * cardsCount - gap;
       displayAreaWidth = -(hourlyListWidth - sliderWidth);
     }
 
-    function update(number: number) {
-      cardsNumber = number;
+    function update(newCount: number) {
+      cardsCount = newCount;
 
       calculateOptions();
       resetListPosition();
@@ -174,7 +195,7 @@ export default function HourlyForecast() {
     });
 
     addEventListener('resize', () => {
-      update(cardsNumber);
+      update(cardsCount);
     });
 
     return { update };
@@ -182,5 +203,5 @@ export default function HourlyForecast() {
 
   const slider = Slider();
 
-  return { render };
+  return { handleCardsCreation };
 }
