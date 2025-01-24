@@ -18,7 +18,7 @@ export interface IForecastForDays {
 
 export type TOnCardButtonClick = (e: MouseEvent) => void;
 
-interface IHour {
+export interface IHour {
   datetime: string;
   icon: string;
   temp: number;
