@@ -43,7 +43,7 @@ export async function handleRequest({
   loader,
   request,
   fetchForecast,
-  render,
+  handleCardsCreation,
 }: IHandleRequestParams) {
   try {
     hide(error);
@@ -51,7 +51,7 @@ export async function handleRequest({
     show(loader);
 
     const data = await fetchForecast(request);
-    render(data.days);
+    handleCardsCreation(data.days);
 
     hide(loader);
     hide(error);
