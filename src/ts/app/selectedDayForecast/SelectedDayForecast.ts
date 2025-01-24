@@ -1,10 +1,9 @@
-import type { ISelectedDayForecast, IDay, IRequestData } from '../types';
-import {
-  TOO_MANY_REQUESTS_CODE,
-  TOO_MANY_REQUESTS_MESSAGE,
-  BAD_REQUEST_CODE,
-  BAD_REQUEST_MESSAGE,
-} from '../constants';
+import type {
+  ISelectedDayForecast,
+  IDay,
+  IRequestData,
+  IForecastData,
+} from '../types';
 
 import HourlyForecast from './HourlyForecast';
 
@@ -12,7 +11,7 @@ import { fetchForecast } from '../api/fetchForecast';
 
 import { ru } from 'date-fns/locale';
 import { parseISO, isToday, format } from 'date-fns';
-import { show, hide, capitalize } from '../utils';
+import { capitalize, handleRequest } from '../utils';
 
 export default function SelectedDayForecast(): ISelectedDayForecast {
   const loader = document.querySelector(
@@ -49,7 +48,54 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
   const humidityTextElement = document.querySelector('.humidity__text');
   const pressureTextElement = document.querySelector('.pressure__text');
 
-  function render(address: string, day: IDay) {
+  function convertKphToMps(valueInKph: number) {
+    return valueInKph / 3.6;
+  }
+
+  function convertMillibarToMercury(valueInMillibar: number) {
+    return valueInMillibar / 1.333;
+  }
+
+  function formatDayData(day: IDay) {
+    const {
+      datetime,
+      temp,
+      conditions,
+      feelslike,
+      humidity,
+      windspeed,
+      winddir,
+      pressure,
+    } = day;
+
+    const date = parseISO(datetime);
+    const dayString = format(date, "d MMMM',' eeee", { locale: ru });
+    const normilizedConditionsString = capitalize(
+      conditions.toLocaleLowerCase()
+    );
+    const windspeedInMps = convertKphToMps(windspeed);
+    const pressureInMercury = convertMillibarToMercury(pressure);
+
+    const formattedData = {
+      datetime: dayString,
+      temp: Math.round(temp),
+      conditions: normilizedConditionsString,
+      feelsLike: Math.round(feelslike),
+      windspeed: Math.round(windspeedInMps),
+      winddir: Math.round(winddir),
+      humidity: Math.round(humidity),
+      pressure: Math.round(pressureInMercury),
+    };
+
+    return {
+      ...day,
+      ...formattedData,
+    };
+  }
+
+  function createCard(day: IDay, address: string) {
+    const formattedData = formatDayData(day);
+
     const {
       datetime,
       temp,
@@ -60,44 +106,50 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
       windspeed,
       winddir,
       pressure,
-    } = day;
+    } = formattedData;
 
     addressElement.textContent = address;
 
-    const date = parseISO(datetime);
-    const dayString = format(date, "d MMMM',' eeee", { locale: ru });
+    dayElement.textContent = datetime;
 
-    dayElement.textContent = dayString;
-
-    const roundedTemp = Math.round(temp);
-    tempElement.textContent = `${roundedTemp}°`;
+    tempElement.textContent = `${temp}°`;
 
     import(`../../../assets/img/forecast/${icon}.svg`).then(
       (res) => (iconElement.src = res.default)
     );
     iconElement.alt = conditions;
 
-    const normilizedConditionsString = capitalize(
-      conditions.toLocaleLowerCase()
-    );
-    conditionsElement.textContent = normilizedConditionsString;
+    conditionsElement.textContent = conditions;
 
-    const roundedFeelsLike = Math.round(feelslike);
-    feelsLikeTempElement.textContent = `${roundedFeelsLike}°`;
+    feelsLikeTempElement.textContent = `${feelslike}°`;
 
-    const roundedWindspeed = Math.round(windspeed / 3.6);
-    windTextElement.textContent = `${roundedWindspeed} м/с`;
+    windTextElement.textContent = `${windspeed} м/с`;
 
-    const roundedWinddir = Math.round(winddir);
-    windDirectionIconElement.style.transform = `rotate(${roundedWinddir}deg)`;
+    windDirectionIconElement.style.transform = `rotate(${winddir}deg)`;
     windDirectionIconElement.alt = 'Иконка, указывающая направление ветра';
 
-    const roundedHumidity = Math.round(humidity);
-    humidityTextElement.textContent = `${roundedHumidity}%`;
+    humidityTextElement.textContent = `${humidity}%`;
+    pressureTextElement.textContent = `${pressure} мм.рт.ст.`;
+  }
 
-    const pressureInMercury = pressure / 1.333;
-    const roundedPressure = Math.round(pressureInMercury);
-    pressureTextElement.textContent = `${roundedPressure} мм.рт.ст.`;
+  function handleCardsCreation(data: IForecastData) {
+    const { currentConditions, resolvedAddress, days } = data;
+
+    const firstDay = days[0];
+
+    if (currentConditions) {
+      createCard(
+        {
+          ...currentConditions,
+          datetime: firstDay.datetime,
+        },
+        resolvedAddress
+      );
+      hourlyForecast.render(days, currentConditions.datetime);
+    } else {
+      createCard(firstDay, resolvedAddress);
+      hourlyForecast.render(days);
+    }
   }
 
   async function getForecast(address: string, dateISO: string) {
@@ -110,39 +162,14 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
         'elements=temp,feelslike,humidity,pressure,windspeed,winddir,datetime,icon,conditions',
     };
 
-    try {
-      hide(error);
-      hide(forecastDayContainerElement);
-      show(loader);
-
-      const data = await fetchForecast(request);
-      show(forecastDayContainerElement);
-
-      const { resolvedAddress, currentConditions, days } = data;
-
-      if (currentConditions) {
-        render(resolvedAddress, {
-          ...currentConditions,
-          datetime: days[0].datetime,
-        });
-        hourlyForecast.render(days, currentConditions.datetime);
-      } else {
-        render(resolvedAddress, days[0]);
-        hourlyForecast.render(days);
-      }
-
-      hide(loader);
-      hide(error);
-    } catch (err) {
-      hide(loader);
-      if (err.message === TOO_MANY_REQUESTS_CODE) {
-        error.textContent = TOO_MANY_REQUESTS_MESSAGE;
-      }
-      if (err.message === BAD_REQUEST_CODE) {
-        error.textContent = BAD_REQUEST_MESSAGE;
-      }
-      show(error);
-    }
+    handleRequest({
+      parentElement: forecastDayContainerElement,
+      error,
+      loader,
+      request,
+      fetchForecast,
+      handleCardsCreation,
+    });
   }
 
   const hourlyForecast = HourlyForecast();
