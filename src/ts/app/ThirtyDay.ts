@@ -3,18 +3,20 @@ import type {
   TDays,
   TOnCardButtonClick,
   IRequestData,
+  TFormatDaysData,
 } from './types';
 
 import { fetchForecast } from './api/fetchForecast';
 
-import { ru } from 'date-fns/locale';
-import { parseISO, setDate, getDay, isToday, format } from 'date-fns';
+import { setDate, getDay, isToday, format } from 'date-fns';
 import { handleRequest, highlightButton } from './utils';
+import { DAYS_IN_WEEK } from './constants';
 
 export default function ThirtyDay(
   today: Date,
   onCardButtonClick: TOnCardButtonClick,
-  selectedCardButton: (button: HTMLButtonElement) => void
+  selectedCardButton: (button: HTMLButtonElement) => void,
+  formatDaysData: TFormatDaysData
 ): IForecastForDays {
   const loader = document.querySelector(
     '#thirty-day-loader'
@@ -62,9 +64,7 @@ export default function ThirtyDay(
     cardElement.classList.add(classForColorless);
   }
 
-  function renderCards(days: TDays) {
-    clear();
-
+  function createCards(days: TDays) {
     let rowIndex = 0;
     let dayCount = 0;
 
@@ -73,7 +73,18 @@ export default function ThirtyDay(
     days.forEach((day) => {
       dayCount++;
 
-      const { datetime, icon, tempmax, tempmin, conditions } = day;
+      const formattedData = formatDaysData(day);
+
+      const {
+        date,
+        datetime,
+        dayData,
+        month,
+        icon,
+        tempminRounded,
+        tempmaxRounded,
+        conditions,
+      } = formattedData;
 
       const clone = forecastColTemplate.content.cloneNode(
         true
@@ -105,9 +116,6 @@ export default function ThirtyDay(
         makeDayColorless(cardElement, 'thirty-day-card_colorless');
       }
 
-      const date = parseISO(datetime);
-      const dayData = format(date, 'd', { locale: ru });
-      const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
       dayElement.textContent = `${dayData} ${month}`;
       dayElement.dateTime = datetime;
       cardButtonElement.dataset.date = datetime;
@@ -116,9 +124,6 @@ export default function ThirtyDay(
         (res) => (iconElement.src = res.default)
       );
       iconElement.alt = conditions;
-
-      const tempmaxRounded = Math.round(tempmax);
-      const tempminRounded = Math.round(tempmin);
 
       highestTempElement.textContent = `${tempmaxRounded}°`;
       lowestTempElement.textContent = `${tempminRounded}°`;
@@ -130,10 +135,14 @@ export default function ThirtyDay(
         highlightButton(cardButtonElement);
       }
 
-      if (dayCount % 7 === 0) rowIndex++;
+      if (dayCount % DAYS_IN_WEEK === 0) rowIndex++;
     });
+  }
 
-    forecastBody.addEventListener('click', onCardButtonClick);
+  function handleCardsCreation(days: TDays) {
+    clear();
+
+    createCards(days);
   }
 
   function clear() {
@@ -181,8 +190,9 @@ export default function ThirtyDay(
       error,
       request,
       fetchForecast,
-      render: renderCards,
+      handleCardsCreation,
     });
   }
+  forecastBody.addEventListener('click', onCardButtonClick);
   return { forecastElement, getForecast, clear };
 }

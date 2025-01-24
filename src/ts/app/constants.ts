@@ -1,4 +1,4 @@
-export const API_KEY = 'MUDWJGC5JWDQ4FZZ8SMD93KKR';
+export const API_KEY = 'D9GW7MDHRZ45HXYPHJYLB5GM8';
 export const BASE_URL =
   'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
@@ -16,3 +16,5 @@ export const INVALID_PATTERN_MESSAGE =
 export const HIDDEN_CLASS = 'hidden';
 export const DISABLED_CLASS = 'disabled';
 export const SELECTED_CARD_CLASS = 'forecast-card-button_selected';
+
+export const DAYS_IN_WEEK = 7;
