@@ -53,7 +53,7 @@ export default function Forecast() {
     document.body.scrollIntoView(true);
   };
 
-  const formatDaysData: TFormatDaysData = function (day, options) {
+  const formatDaysData: TFormatDaysData = function (day, options?) {
     const { datetime, tempmin, tempmax } = day;
 
     const date = parseISO(datetime);
