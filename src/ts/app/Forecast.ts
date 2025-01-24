@@ -1,11 +1,15 @@
-import type { TOnCardButtonClick, IForecastSelectionParams } from './types';
+import type {
+  TOnCardButtonClick,
+  IForecastSelectionParams,
+  TFormatDaysData,
+} from './types';
 
 import TenDay from './TenDay';
 import ThirtyDay from './ThirtyDay';
 import SelectedDayForecast from './selectedDayForecast/SelectedDayForecast';
 
 import { ru } from 'date-fns/locale';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import {
   show,
   hide,
@@ -49,9 +53,53 @@ export default function Forecast() {
     document.body.scrollIntoView(true);
   };
 
+  const formatDaysData: TFormatDaysData = function (day, options) {
+    const { datetime, tempmin, tempmax } = day;
+
+    const date = parseISO(datetime);
+    const dayData = format(date, 'd', { locale: ru });
+    const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
+
+    const tempminRounded = Math.round(tempmin);
+    const tempmaxRounded = Math.round(tempmax);
+
+    const formattedData: {
+      date: Date;
+      dayData: string;
+      month: string;
+      tempminRounded: number;
+      tempmaxRounded: number;
+      weekday?: string;
+    } = {
+      date,
+      dayData,
+      month,
+      tempminRounded,
+      tempmaxRounded,
+    };
+
+    if (options?.weekday) {
+      formattedData.weekday = format(date, 'eeeeee', { locale: ru });
+    }
+
+    return {
+      ...day,
+      ...formattedData,
+    };
+  };
+
   const selectedDay = SelectedDayForecast();
-  const tenDay = TenDay(onCardButtonClick, setSelectedCardButton);
-  const thirtyDay = ThirtyDay(today, onCardButtonClick, setSelectedCardButton);
+  const tenDay = TenDay(
+    onCardButtonClick,
+    setSelectedCardButton,
+    formatDaysData
+  );
+  const thirtyDay = ThirtyDay(
+    today,
+    onCardButtonClick,
+    setSelectedCardButton,
+    formatDaysData
+  );
 
   function handleForecastSelection({
     buttonToHighlight,
