@@ -60,22 +60,19 @@ export default function Forecast() {
     const dayData = format(date, 'd', { locale: ru });
     const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
 
-    const tempminRounded = Math.round(tempmin);
-    const tempmaxRounded = Math.round(tempmax);
-
     const formattedData: {
       date: Date;
       dayData: string;
       month: string;
-      tempminRounded: number;
-      tempmaxRounded: number;
+      tempmin: number;
+      tempmax: number;
       weekday?: string;
     } = {
       date,
       dayData,
       month,
-      tempminRounded,
-      tempmaxRounded,
+      tempmin: Math.round(tempmin),
+      tempmax: Math.round(tempmax),
     };
 
     if (options?.weekday) {
