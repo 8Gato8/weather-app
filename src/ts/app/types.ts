@@ -48,7 +48,7 @@ export interface IRequestData {
   params?: string;
 }
 
-interface IForecastData {
+export interface IForecastData {
   days: TDays;
   currentConditions?: IDay;
   resolvedAddress: string;
@@ -66,7 +66,7 @@ export interface IHandleRequestParams {
   error: HTMLParagraphElement;
   request: IRequestData;
   fetchForecast: TFetchForecast;
-  handleCardsCreation: (days: TDays) => void;
+  handleCardsCreation: (days: IForecastData) => void;
 }
 
 export interface IForecastSelectionParams {
@@ -89,7 +89,7 @@ export type TFormatDaysData = (
   month: string;
   conditions: string;
   icon: string;
-  tempminRounded: number;
-  tempmaxRounded: number;
+  tempmin: number;
+  tempmax: number;
   weekday?: string;
 };
