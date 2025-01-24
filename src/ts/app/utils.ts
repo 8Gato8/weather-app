@@ -51,11 +51,12 @@ export async function handleRequest({
     show(loader);
 
     const data = await fetchForecast(request);
-    handleCardsCreation(data.days);
 
     hide(loader);
     hide(error);
     show(parentElement);
+
+    handleCardsCreation(data);
   } catch (err) {
     hide(loader);
     if (err.message === TOO_MANY_REQUESTS_CODE) {
