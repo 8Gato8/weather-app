@@ -1,6 +1,7 @@
 import type {
   IForecastForDays,
   TDays,
+  IDay,
   TOnCardButtonClick,
   IRequestData,
 } from './types';
@@ -13,7 +14,7 @@ import { handleRequest, highlightButton } from './utils';
 
 export default function TenDay(
   onCardButtonClick: TOnCardButtonClick,
-  selectedCardButton: (button: HTMLButtonElement) => void
+  setSelectedCardButton: (button: HTMLButtonElement) => void
 ): IForecastForDays {
   const loader = document.querySelector('#ten-day-loader') as HTMLImageElement;
   const error = document.querySelector(
@@ -30,11 +31,43 @@ export default function TenDay(
     '#ten-day-forecast-card-template'
   ) as HTMLTemplateElement;
 
-  function renderCards(days: TDays) {
-    clear();
+  function formatDaysData(day: IDay) {
+    const { datetime, tempmin, tempmax } = day;
 
+    const date = parseISO(datetime);
+    const weekday = format(date, 'eeeeee', { locale: ru });
+    const dayData = format(date, 'd', { locale: ru });
+    const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
+    const tempminRounded = Math.round(tempmin);
+    const tempmaxRounded = Math.round(tempmax);
+
+    return {
+      ...day,
+      date,
+      datetime,
+      weekday,
+      dayData,
+      month,
+      tempminRounded,
+      tempmaxRounded,
+    };
+  }
+
+  function createCards(days: TDays) {
     days.forEach((day) => {
-      const { datetime, icon, conditions, tempmin, tempmax } = day;
+      const formattedData = formatDaysData(day);
+
+      const {
+        date,
+        datetime,
+        weekday,
+        dayData,
+        month,
+        icon,
+        conditions,
+        tempminRounded,
+        tempmaxRounded,
+      } = formattedData;
 
       const clone = cardTemplate.content.cloneNode(true) as DocumentFragment;
       const cardButtonElement = clone.querySelector(
@@ -58,38 +91,32 @@ export default function TenDay(
         '#ten-day-card-lowest-temp'
       );
 
-      const date = parseISO(datetime);
-
-      const weekday = format(date, 'eeeeee', { locale: ru });
       weekdayElement.textContent = weekday;
-
-      const dayData = format(date, 'd', { locale: ru });
-      const month = format(date, 'MMM', { locale: ru }).slice(0, -1);
       dayElement.textContent = `${dayData} ${month}`;
       dayElement.dateTime = datetime;
       cardButtonElement.dataset.date = datetime;
 
-      const iconName = icon;
-      import(`../../assets/img/forecast/${iconName}.svg`).then(
+      import(`../../assets/img/forecast/${icon}.svg`).then(
         (res) => (iconElement.src = res.default)
       );
       iconElement.alt = conditions;
-
-      const tempmaxRounded = Math.round(tempmax);
-      const tempminRounded = Math.round(tempmin);
 
       highestTempElement.textContent = `${tempmaxRounded}°`;
       lowestTempElement.textContent = `${tempminRounded}°`;
 
       if (isToday(date)) {
-        selectedCardButton(cardButtonElement);
+        setSelectedCardButton(cardButtonElement);
         highlightButton(cardButtonElement);
       }
 
       forecastList.appendChild(cardButtonElement);
     });
+  }
 
-    forecastList.addEventListener('click', onCardButtonClick);
+  function handleCardsCreation(days: TDays) {
+    clear();
+
+    createCards(days);
   }
 
   function clear() {
@@ -111,8 +138,10 @@ export default function TenDay(
       error,
       request,
       fetchForecast,
-      render: renderCards,
+      handleCardsCreation,
     });
   }
+
+  forecastList.addEventListener('click', onCardButtonClick);
   return { forecastElement, getForecast, clear };
 }
