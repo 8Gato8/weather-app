@@ -4,6 +4,7 @@ import type {
   TOnCardButtonClick,
   IRequestData,
   TFormatDaysData,
+  IForecastData,
 } from './types';
 
 import { fetchForecast } from './api/fetchForecast';
@@ -81,8 +82,8 @@ export default function ThirtyDay(
         dayData,
         month,
         icon,
-        tempminRounded,
-        tempmaxRounded,
+        tempmin,
+        tempmax,
         conditions,
       } = formattedData;
 
@@ -125,8 +126,8 @@ export default function ThirtyDay(
       );
       iconElement.alt = conditions;
 
-      highestTempElement.textContent = `${tempmaxRounded}°`;
-      lowestTempElement.textContent = `${tempminRounded}°`;
+      highestTempElement.textContent = `${tempmax}°`;
+      lowestTempElement.textContent = `${tempmin}°`;
 
       forecastRowNodeList[rowIndex].appendChild(forecastColElement);
 
@@ -139,8 +140,10 @@ export default function ThirtyDay(
     });
   }
 
-  function handleCardsCreation(days: TDays) {
+  function handleCardsCreation(data: IForecastData) {
     clear();
+
+    const days = data.days;
 
     createCards(days);
   }

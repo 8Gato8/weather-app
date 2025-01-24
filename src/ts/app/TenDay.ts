@@ -1,5 +1,6 @@
 import type {
   IForecastForDays,
+  IForecastData,
   TDays,
   TOnCardButtonClick,
   IRequestData,
@@ -42,8 +43,8 @@ export default function TenDay(
         month,
         icon,
         conditions,
-        tempminRounded,
-        tempmaxRounded,
+        tempmin,
+        tempmax,
       } = formattedData;
 
       const clone = cardTemplate.content.cloneNode(true) as DocumentFragment;
@@ -78,8 +79,8 @@ export default function TenDay(
       );
       iconElement.alt = conditions;
 
-      highestTempElement.textContent = `${tempmaxRounded}°`;
-      lowestTempElement.textContent = `${tempminRounded}°`;
+      highestTempElement.textContent = `${tempmax}°`;
+      lowestTempElement.textContent = `${tempmin}°`;
 
       if (isToday(date)) {
         setSelectedCardButton(cardButtonElement);
@@ -90,8 +91,10 @@ export default function TenDay(
     });
   }
 
-  function handleCardsCreation(days: TDays) {
+  function handleCardsCreation(data: IForecastData) {
     clear();
+
+    const days = data.days;
 
     createCards(days);
   }
