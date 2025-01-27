@@ -78,7 +78,7 @@
 
 @media (max-width: 500px) {
   .header {
-    padding: 30px;
+    padding: 25px;
   }
 
   .search-input {
@@ -87,5 +87,11 @@
 
   .search-form__submit-button {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    padding: 15px;
   }
 }

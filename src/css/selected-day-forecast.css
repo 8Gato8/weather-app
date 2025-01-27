@@ -38,6 +38,7 @@
 .selected-day-forecast__address {
   font-size: 1.3rem;
   font-weight: 700;
+  line-height: 1.3;
 }
 
 .selected-day-forecast__yesterday-wrapper {
@@ -99,4 +100,59 @@
   padding-top: 25px;
 
   min-height: 120px;
+}
+
+@media (max-width: 500px) {
+  .selected-day-forecast {
+    padding: 25px;
+  }
+
+  .selected-day-forecast__address {
+    font-size: 1rem;
+  }
+
+  .selected-day-forecast__main-info-wrapper {
+    gap: 10px;
+  }
+
+  .selected-day-forecast__additional-info-wrapper {
+    gap: 20px;
+  }
+
+  .selected-day-forecast__icon {
+    width: 90px;
+    height: 40px;
+  }
+
+  .selected-day-forecast__temp {
+    font-size: 3.5rem;
+  }
+
+  .selected-day-forecast__day,
+  .selected-day-forecast__main-text-info,
+  .selected-day-forecast__additional-info-wrapper {
+    font-size: 0.9rem;
+  }
+
+  .selected-day-forecast__hours {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .selected-day-forecast {
+    padding: 15px;
+  }
+
+  .selected-day-forecast__address {
+    font-size: 1rem;
+  }
+
+  .selected-day-forecast__main-info-wrapper {
+    gap: 5px;
+  }
+
+  .selected-day-forecast__additional-info-wrapper {
+    gap: 15px;
+  }
 }

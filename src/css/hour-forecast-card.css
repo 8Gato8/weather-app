@@ -14,3 +14,9 @@
   width: var(--hourly-card-width);
   height: var(--hourly-card-width);
 }
+
+@media (max-width: 500px) {
+  .hour-forecast-card {
+    font-size: 0.9rem;
+  }
+}
