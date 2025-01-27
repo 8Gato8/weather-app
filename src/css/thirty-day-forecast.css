@@ -7,6 +7,9 @@
 
 .thirty-day-forecast__table {
   width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  overflow: auto;
 }
 
 .thirty-day-forecast__card-button {
@@ -17,4 +20,10 @@
   display: flex;
   justify-content: center;
   margin: 8px 0;
+}
+
+@media (max-width: 850px) {
+  .thirty-day-forecast__table {
+    display: block;
+  }
 }
