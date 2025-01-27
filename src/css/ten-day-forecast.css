@@ -7,7 +7,6 @@
 
 .ten-day-forecast__list {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
   flex: 1;
 }
@@ -18,4 +17,10 @@
 
   border-radius: 8px;
   flex: 1;
+}
+
+@media (max-width: 980px) {
+  .ten-day-forecast__list {
+    overflow-x: scroll;
+  }
 }
