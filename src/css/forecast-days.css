@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 25px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 40px;
 
   background-color: var(--white);

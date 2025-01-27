@@ -1,7 +1,7 @@
 .selected-day-forecast {
   background-color: var(--forecast-main-theme);
   padding: 30px;
-  border-radius: 8px;
+  border-radius: 12px;
 
   color: var(--white);
   min-height: 430px;
