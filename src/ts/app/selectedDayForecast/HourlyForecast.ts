@@ -226,7 +226,7 @@ export default function HourlyForecast() {
       }
     });
 
-    hourlyList.addEventListener('mousedown', (e) => {
+    hourlyList.addEventListener('pointerdown', (e) => {
       e.preventDefault();
 
       hourlyList.classList.remove('hourly-forecast-cards_slider');
@@ -236,9 +236,9 @@ export default function HourlyForecast() {
       currentLeft = parseInt(getComputedStyle(hourlyList).left);
     });
 
-    hourlyList.addEventListener('mousemove', slideByDrag);
+    hourlyList.addEventListener('pointermove', slideByDrag);
 
-    window.addEventListener('mouseup', () => {
+    window.addEventListener('pointerup', () => {
       isClicked = false;
       hourlyList.classList.add('hourly-forecast-cards_slider');
     });
