@@ -80,7 +80,7 @@ export default function SelectedDayForecast(): ISelectedDayForecast {
       datetime: dayString,
       temp: Math.round(temp),
       conditions: normilizedConditionsString,
-      feelsLike: Math.round(feelslike),
+      feelslike: Math.round(feelslike),
       windspeed: Math.round(windspeedInMps),
       winddir: Math.round(winddir),
       humidity: Math.round(humidity),
