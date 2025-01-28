@@ -148,8 +148,12 @@ export default function HourlyForecast() {
       resetListPosition();
     }
 
-    function slide(direction: string) {
-      const currentLeft = parseInt(getComputedStyle(hourlyList).left);
+    let currentLeft = 0;
+    let startPoint = 0;
+    let isClicked = false;
+
+    function slideByClick(direction: string) {
+      currentLeft = parseInt(getComputedStyle(hourlyList).left);
 
       const canSlideRight = currentLeft - step > displayAreaWidth;
       const canSlideLeft = currentLeft + step < 0;
@@ -176,8 +180,36 @@ export default function HourlyForecast() {
       }
     }
 
-    slideLeft.addEventListener('click', () => slide('left'));
-    slideRight.addEventListener('click', () => slide('right'));
+    function slideByDrag(e: MouseEvent) {
+      if (!isClicked) return;
+
+      const step = e.clientX - startPoint;
+      const direction = Math.sign(step) > 0 ? 'left' : 'right';
+
+      const canSlideLeft = currentLeft + step < 0;
+      const canSlideRight = currentLeft + step > displayAreaWidth;
+
+      if (direction === 'right') {
+        enableButton(slideLeft);
+        if (!canSlideRight) {
+          disableButton(slideRight);
+          hourlyList.style.left = `${displayAreaWidth}px`;
+          return;
+        }
+      } else {
+        enableButton(slideRight);
+        if (!canSlideLeft) {
+          disableButton(slideLeft);
+          hourlyList.style.left = `0`;
+          return;
+        }
+      }
+
+      hourlyList.style.left = `${currentLeft + step}px`;
+    }
+
+    slideLeft.addEventListener('click', () => slideByClick('left'));
+    slideRight.addEventListener('click', () => slideByClick('right'));
 
     document.addEventListener('keydown', (e) => {
       const keyName = e.key;
@@ -185,16 +217,33 @@ export default function HourlyForecast() {
       if (keyName === 'ArrowRight') {
         if (slideRight.hasAttribute('disabled')) return;
 
-        slide('right');
+        slideByClick('right');
       }
       if (keyName === 'ArrowLeft') {
         if (slideLeft.hasAttribute('disabled')) return;
 
-        slide('left');
+        slideByClick('left');
       }
     });
 
-    addEventListener('resize', () => {
+    hourlyList.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+
+      hourlyList.classList.remove('hourly-forecast-cards_slider');
+      isClicked = true;
+
+      startPoint = e.clientX;
+      currentLeft = parseInt(getComputedStyle(hourlyList).left);
+    });
+
+    hourlyList.addEventListener('mousemove', slideByDrag);
+
+    window.addEventListener('mouseup', () => {
+      isClicked = false;
+      hourlyList.classList.add('hourly-forecast-cards_slider');
+    });
+
+    window.addEventListener('resize', () => {
       update(cardsCount);
     });
 
