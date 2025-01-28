@@ -5,5 +5,13 @@
   display: flex;
   gap: var(--hourly-card-gap);
 
+  user-select: none;
+}
+
+.hourly-forecast-cards_slider {
   transition-duration: 480ms;
+}
+
+.hourly-forecast-cards:hover {
+  cursor: pointer;
 }
