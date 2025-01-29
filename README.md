@@ -1,5 +1,3 @@
-# weather-app
-
 ## [Демонстрация сайта](https://8gato8.github.io/weather-app/)
 
 <div align="center">
